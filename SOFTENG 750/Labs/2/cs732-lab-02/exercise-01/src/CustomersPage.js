@@ -1,14 +1,14 @@
 import styles from "./CustomersPage.module.css";
 import CustomerTable from "./CustomerTable";
-import { useState } from "react";
-import { initialCustomers } from "./data";
+import { useContext, useState } from "react";
 import AddCustomerButton from "./AddCustomerButton";
 import { Switch, Route } from "react-router";
 import AddCustomerPage from "./AddCustomerPage";
 import dayjs from "dayjs";
+import { AppContext } from "./AppContextProvider";
 
 export default function CustomersPage() {
-	const [customers, setCustomers] = useState(initialCustomers);
+	const { customers, addCustomers } = useContext(AppContext);
 
 	return (
 		<>
@@ -20,12 +20,9 @@ export default function CustomersPage() {
 					<Route path="/customers/add">
 						<AddCustomerPage
 							customerId={customers.length + 1}
-							addCustomer={(newCustomer) => {
-								console.log(newCustomer);
-								console.log(customers[0]);
-								const newState = [...customers, newCustomer];
-								setCustomers(newState);
-							}}
+							addCustomer={(newCustomer) =>
+								addCustomers(newCustomer)
+							}
 						/>
 					</Route>
 					<AddCustomerButton />

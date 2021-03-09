@@ -3,7 +3,6 @@ import { useState } from "react";
 import initialArticles from "./data";
 import NavBar from "./NavBar";
 import CustomersPage from "./CustomersPage";
-import AddCustomerPage from "./AddCustomerPage";
 
 /**
  * Renders a navbar allowing the user to browse to the articles or gallery pages.
