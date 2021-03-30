@@ -1,0 +1,7 @@
+Colour,Length,Size,Brightness,Shape,Class
+red,long,larger,bright,triangle,True
+red,long,small,bright,circle,False
+red,long,small,bright,triangle,True
+red,short,larger,dull,circle,False
+red,short,larger,bright,triangle,True
+blue,short,larger,bright,triangle,False
