@@ -102,12 +102,30 @@ Literature Review
 Parking Models
 \end_layout
 
+\begin_layout Standard
+How has parking been traditionally done, researched
+\end_layout
+
 \begin_layout Subsection
 Pricing
 \end_layout
 
+\begin_layout Itemize
+Dynamic vs static pricing models.
+\end_layout
+
+\begin_layout Itemize
+Airbnb vs Uber pricing
+\end_layout
+
 \begin_layout Subsection
 Technologies to Implement Mobile Application
+\end_layout
+
+\begin_layout Standard
+Bjorn-Hansen et al.
+ investigated the features and performances between different cross-platform
+ development frameworks, such as React Native (interpreted), PWAs, ...
 \end_layout
 
 \begin_layout Subsection
@@ -123,11 +141,29 @@ Existing Applications
 \end_layout
 
 \begin_layout Standard
-Apply Nielsons Heuristics to 
+Apply Nielsons Heuristics to similar applications and see where they can
+ be improved
 \end_layout
 
 \begin_layout Section
 Discussion
+\end_layout
+
+\begin_layout Itemize
+What features are we going to include in our application.
+ 
+\end_layout
+
+\begin_layout Itemize
+What technologies we will use
+\end_layout
+
+\begin_layout Itemize
+What will we do differently than existing applications
+\end_layout
+
+\begin_layout Itemize
+Other considerations
 \end_layout
 
 \begin_layout Section
@@ -143,6 +179,11 @@ Rental parking mobile application.
  No navigation built in, but use google maps api.
  User inputs credit card/payment method on signup and we automatically charge
  from there.
+ Time window for a parking spot, so owner can use when they want, need to
+ tell parkers too.
+ Address of parking spot and images.
+ Can include number of spots per parking location.
+ Quarter hourly rate for spots 
 \end_layout
 
 \begin_layout Standard
@@ -151,7 +192,50 @@ Start session using the app, and end session using app.
 \end_layout
 
 \begin_layout Standard
-Pricing model: 
+Pricing model: Per minute/10minute/15 minute charging, so if you only need
+ for a short period you pay very little.
+ Min charge of 15mins to discourage immediate fraudulent ending.
+ Keep price fixed for now, can change in the future
+\end_layout
+
+\begin_layout Standard
+Enforcement: Peer to peer reporting.
+ If you go to a parking location, and there is a car there, user can report.
+ Owner can also report.
+ Strike model, banned if exceeded, fines if caught
+\end_layout
+
+\begin_layout Standard
+Researching whether we can combat problems in parking industry via mobile
+ software application.
+ The problems are: not enough parking space, lots of cruising time looking
+ for parking spaces esp curb parking, excess parking at residential properties
+ due to parking mandate by council, parking space per capita has been decreasing
+ in Auckland CBD not enough space to construct, investigate benefits and
+ disadvantages of demand paced pricing models, also pricing by time slice
+\end_layout
+
+\begin_layout Standard
+Determine mobile application framework (interpreted or pwa or hybrid) and
+ also tech stack to fit user requirements that we encounter.
+ Native or non native, desktop vs web app vs mobile app
+\end_layout
+
+\begin_layout Standard
+Usability requirements for target demographic
+\end_layout
+
+\begin_layout Standard
+Analyse usability heuristics based on platform choice
+\end_layout
+
+\begin_layout Standard
+Map
+\end_layout
+
+\begin_layout Standard
+Prototype/MVP will be produced as an example to demonstrate these learned
+ concepts
 \end_layout
 
 \begin_layout Section
