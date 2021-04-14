@@ -1,4 +1,4 @@
-function ViewSoln(x, PotAl, PotFe, NoCrucibles, ...
+function totalValue = ViewSoln(x, PotAl, PotFe, NoCrucibles, ...
                   NoQualities, QualityMinAl, QualityMaxFe, QualityValue)
 % Print current solution in x to the screen. 
 % The solution objective & spread is calculated from scratch and printed.	
@@ -13,4 +13,5 @@ function ViewSoln(x, PotAl, PotFe, NoCrucibles, ...
 	        CrucibleAl , CrucibleFe, CrucibleValue(c), spread);
   end
   fprintf('                        Sum,Max= %6.2f,%2d\n',sum(CrucibleValue), maxSpread)
+  totalValue = sum(CrucibleValue);
 end

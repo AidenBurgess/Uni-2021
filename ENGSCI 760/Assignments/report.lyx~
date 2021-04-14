@@ -1,0 +1,506 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Section
+Question 1
+\end_layout
+
+\begin_layout Subsection
+English definition of neighbourhood rule
+\end_layout
+
+\begin_layout Standard
+Swap the crucibles for any two pots
+\end_layout
+
+\begin_layout Subsection
+Formal neighbour definition
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $y(x,i,j)=(x_{1},x_{2},...,x_{i-1},x_{j},x_{i+1},...x_{j-1},x_{i},x_{j+1},...x_{n})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Formal neighbourhood definition
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $N(x)=\{y(x,i,j),\,i=1,...,n,\,j=i+1,...,n;\,(i,j)<>(1,n)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Question 2
+\end_layout
+
+\begin_layout Subsection
+Intermediate values
+\end_layout
+
+\begin_layout Standard
+Crucible value in dollars
+\end_layout
+
+\begin_layout Subsection
+Next ascent sweep algo psuedocode
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+for i = 1...n
+\end_layout
+
+\begin_layout Plain Layout
+
+	for j = i+1...n
+\end_layout
+
+\begin_layout Plain Layout
+
+		if f(y(x,i,j)) - f(x) > 0 then
+\end_layout
+
+\begin_layout Plain Layout
+
+			// Update intermediate values
+\end_layout
+
+\begin_layout Plain Layout
+
+			crucibleValues[i] = g(x,i)
+\end_layout
+
+\begin_layout Plain Layout
+
+			crucibleValues[j] = g(x,j)
+\end_layout
+
+\begin_layout Plain Layout
+
+			x := y
+\end_layout
+
+\begin_layout Plain Layout
+
+	endfor
+\end_layout
+
+\begin_layout Plain Layout
+
+endfor
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Question 3
+\end_layout
+
+\begin_layout Section
+Question 4
+\end_layout
+
+\begin_layout Subsection
+a)
+\end_layout
+
+\begin_layout Standard
+Would expect this problem to have a lot of plateaus
+\end_layout
+
+\begin_layout Standard
+WHY?
+\end_layout
+
+\begin_layout Subsection
+b)
+\end_layout
+
+\begin_layout Standard
+Add slope to plateaus by including standard deviation change 
+\end_layout
+
+\begin_layout Standard
+The logic for this is that its more desirable to have Fe and Al values which
+ are similar to each other in the same crucible as this will minimise the
+ 
+\begin_inset Quotes eld
+\end_inset
+
+waste
+\begin_inset Quotes erd
+\end_inset
+
+ of a potentially very good pot or prevent a particularly bad pot bringing
+ down good pots
+\end_layout
+
+\begin_layout Subsection
+c)
+\end_layout
+
+\begin_layout Standard
+Unsure the answer to this...
+\end_layout
+
+\begin_layout Section
+Question 5
+\end_layout
+
+\begin_layout Subsection
+a)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $g''(\overline{Al},\overline{Fe},x_{c1},x_{c2},x_{c3},s)=if\,max(x_{c1},x_{c2},x_{c3})-min(x_{c1},x_{c2},x_{c3})>=s:g(\overline{Al},\overline{Fe})\times\frac{s}{max(x_{c1},x_{c2},x_{c3})-min(x_{c1},x_{c2},x_{c3})}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+else 
+\begin_inset Formula $g(\overline{Al},\overline{Fe})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+b)
+\end_layout
+
+\begin_layout Subsection
+c)
+\end_layout
+
+\begin_layout Subsubsection
+Max Spread 6
+\end_layout
+
+\begin_layout Standard
+Solution Output:
+\end_layout
+
+\begin_layout Standard
+1 [ 35 36 41] 99.64Al 0.51Fe 48.71 6 
+\end_layout
+
+\begin_layout Standard
+2 [ 37 40 34] 99.76Al 0.36Fe 57.35 6 
+\end_layout
+
+\begin_layout Standard
+3 [ 14 17 18] 99.66Al 0.42Fe 52.44 4 
+\end_layout
+
+\begin_layout Standard
+4 [ 6 5 2] 99.55Al 0.53Fe 48.71 4 
+\end_layout
+
+\begin_layout Standard
+5 [ 22 19 25] 99.35Al 0.74Fe 41.53 6 
+\end_layout
+
+\begin_layout Standard
+6 [ 3 4 1] 99.77Al 0.29Fe 57.35 3 
+\end_layout
+
+\begin_layout Standard
+7 [ 49 44 50] 99.26Al 0.49Fe 41.53 6 
+\end_layout
+
+\begin_layout Standard
+8 [ 15 12 11] 99.52Al 0.50Fe 48.71 4 
+\end_layout
+
+\begin_layout Standard
+9 [ 48 46 43] 99.75Al 0.41Fe 57.35 5 
+\end_layout
+
+\begin_layout Standard
+10 [ 13 16 10] 99.41Al 0.71Fe 44.53 6 
+\end_layout
+
+\begin_layout Standard
+11 [ 39 38 33] 99.37Al 0.69Fe 44.53 6 
+\end_layout
+
+\begin_layout Standard
+12 [ 20 23 26] 99.53Al 0.72Fe 44.53 6 
+\end_layout
+
+\begin_layout Standard
+13 [ 7 9 8] 99.50Al 0.44Fe 48.71 2 
+\end_layout
+
+\begin_layout Standard
+14 [ 27 31 32] 99.55Al 0.50Fe 48.71 5 
+\end_layout
+
+\begin_layout Standard
+15 [ 42 47 45] 99.51Al 0.37Fe 48.71 5 
+\end_layout
+
+\begin_layout Standard
+16 [ 28 30 24] 99.77Al 0.38Fe 57.35 6 
+\end_layout
+
+\begin_layout Standard
+17 [ 21 51 29] 99.37Al 0.42Fe 44.53 30
+\end_layout
+
+\begin_layout Standard
+Sum,Max= 835.28,30
+\end_layout
+
+\begin_layout Subsubsection
+Max Spread 8
+\end_layout
+
+\begin_layout Standard
+Solution Output:
+\end_layout
+
+\begin_layout Standard
+1 [ 44 49 51] 99.30Al 0.31Fe 41.53 7 
+\end_layout
+
+\begin_layout Standard
+2 [ 10 16 13] 99.41Al 0.71Fe 44.53 6 
+\end_layout
+
+\begin_layout Standard
+3 [ 31 26 23] 99.50Al 0.49Fe 48.71 8 
+\end_layout
+
+\begin_layout Standard
+4 [ 15 11 12] 99.52Al 0.50Fe 48.71 4 
+\end_layout
+
+\begin_layout Standard
+5 [ 39 33 32] 99.35Al 0.70Fe 44.53 7 
+\end_layout
+
+\begin_layout Standard
+6 [ 27 19 25] 99.40Al 0.67Fe 44.53 8 
+\end_layout
+
+\begin_layout Standard
+7 [ 29 28 21] 99.50Al 0.51Fe 48.71 8 
+\end_layout
+
+\begin_layout Standard
+8 [ 41 40 35] 99.77Al 0.43Fe 57.35 6 
+\end_layout
+
+\begin_layout Standard
+9 [ 18 17 24] 99.78Al 0.41Fe 57.35 7 
+\end_layout
+
+\begin_layout Standard
+10 [ 43 48 46] 99.75Al 0.41Fe 57.35 5 
+\end_layout
+
+\begin_layout Standard
+11 [ 2 5 4] 99.55Al 0.47Fe 48.71 3 
+\end_layout
+
+\begin_layout Standard
+12 [ 14 20 22] 99.51Al 0.70Fe 44.53 8 
+\end_layout
+
+\begin_layout Standard
+13 [ 9 8 7] 99.50Al 0.44Fe 48.71 2 
+\end_layout
+
+\begin_layout Standard
+14 [ 42 34 36] 99.54Al 0.46Fe 48.71 8 
+\end_layout
+
+\begin_layout Standard
+15 [ 50 47 45] 99.37Al 0.52Fe 44.53 5 
+\end_layout
+
+\begin_layout Standard
+16 [ 30 38 37] 99.75Al 0.41Fe 57.35 8 
+\end_layout
+
+\begin_layout Standard
+17 [ 1 3 6] 99.77Al 0.34Fe 57.35 5 
+\end_layout
+
+\begin_layout Standard
+Sum,Max= 843.19, 8
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Subsubsection
+Max Spread 11
+\end_layout
+
+\begin_layout Standard
+1 [ 11 19 20] 99.38Al 0.64Fe 44.53 9 
+\end_layout
+
+\begin_layout Standard
+2 [ 38 37 30] 99.75Al 0.41Fe 57.35 8 
+\end_layout
+
+\begin_layout Standard
+3 [ 15 8 6] 99.58Al 0.49Fe 48.71 9 
+\end_layout
+
+\begin_layout Standard
+4 [ 47 49 51] 99.27Al 0.43Fe 41.53 4 
+\end_layout
+
+\begin_layout Standard
+5 [ 29 28 21] 99.50Al 0.51Fe 48.71 8 
+\end_layout
+
+\begin_layout Standard
+6 [ 24 17 18] 99.78Al 0.41Fe 57.35 7 
+\end_layout
+
+\begin_layout Standard
+7 [ 1 10 9] 99.75Al 0.37Fe 57.35 9 
+\end_layout
+
+\begin_layout Standard
+8 [ 7 5 16] 99.53Al 0.45Fe 48.71 11 
+\end_layout
+
+\begin_layout Standard
+9 [ 40 34 43] 99.76Al 0.45Fe 57.35 9 
+\end_layout
+
+\begin_layout Standard
+10 [ 22 33 26] 99.51Al 0.51Fe 48.71 11 
+\end_layout
+
+\begin_layout Standard
+11 [ 2 3 4] 99.58Al 0.51Fe 48.71 2 
+\end_layout
+
+\begin_layout Standard
+12 [ 50 42 39] 99.25Al 0.52Fe 41.53 11 
+\end_layout
+
+\begin_layout Standard
+13 [ 44 35 36] 99.53Al 0.53Fe 48.71 9 
+\end_layout
+
+\begin_layout Standard
+14 [ 32 27 31] 99.55Al 0.50Fe 48.71 5 
+\end_layout
+
+\begin_layout Standard
+15 [ 14 23 25] 99.35Al 0.65Fe 44.53 11 
+\end_layout
+
+\begin_layout Standard
+16 [ 41 46 45] 99.80Al 0.42Fe 57.35 5 
+\end_layout
+
+\begin_layout Standard
+17 [ 13 48 12] 99.40Al 0.69Fe 44.53 36 
+\end_layout
+
+\begin_layout Standard
+Sum,Max= 844.37,36
+\end_layout
+
+\end_body
+\end_document
