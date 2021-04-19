@@ -75,23 +75,34 @@
 
 \begin_body
 
+\begin_layout Standard
+I swear on my faith in humanity that I guarantee the assignment is my own
+ work, and all the code handed in was written and keyed in by myself (or
+ downloaded from the course website) without undue assistance from others.
+\end_layout
+
 \begin_layout Section
+\noindent
 Question 1
 \end_layout
 
 \begin_layout Subsection
+\noindent
 English definition of neighbourhood rule
 \end_layout
 
 \begin_layout Standard
-Swap the crucibles for any two pots
+\noindent
+Swap the crucibles for any two pots which have different crucibles
 \end_layout
 
 \begin_layout Subsection
+\noindent
 Formal neighbour definition
 \end_layout
 
 \begin_layout Standard
+\noindent
 \begin_inset Formula $y(x,i,j)=(x_{1},x_{2},...,x_{i-1},x_{j},x_{i+1},...x_{j-1},x_{i},x_{j+1},...x_{n})$
 \end_inset
 
@@ -99,10 +110,12 @@ Formal neighbour definition
 \end_layout
 
 \begin_layout Subsection
+\noindent
 Formal neighbourhood definition
 \end_layout
 
 \begin_layout Standard
+\noindent
 \begin_inset Formula $N(x)=\{y(x,i,j),\,i=1,...,n,\,j=i+1,...,n;\,(i,j)<>(1,n)$
 \end_inset
 
@@ -110,22 +123,27 @@ Formal neighbourhood definition
 \end_layout
 
 \begin_layout Section
+\noindent
 Question 2
 \end_layout
 
 \begin_layout Subsection
+\noindent
 Intermediate values
 \end_layout
 
 \begin_layout Standard
+\noindent
 Crucible value in dollars
 \end_layout
 
 \begin_layout Subsection
+\noindent
 Next ascent sweep algo psuedocode
 \end_layout
 
 \begin_layout Standard
+\noindent
 \begin_inset listings
 inline false
 status open
@@ -181,65 +199,373 @@ endfor
 \end_layout
 
 \begin_layout Section
+\noindent
 Question 3
 \end_layout
 
+\begin_layout Subsection
+\noindent
+3B plot - AscendToLocalMax
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ENGSCI 760 Heuristics Assignment 2021 code/Heuristics code/AscendToLocalMax.png
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+AscendToLocalMax Plot
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+Solution Output:
+\end_layout
+
+\begin_layout Standard
+\noindent
+1 [ 26 41 18] 99.76Al 0.42Fe 57.35 23 
+\end_layout
+
+\begin_layout Standard
+\noindent
+2 [ 15 13 33] 99.35Al 0.63Fe 44.53 20 
+\end_layout
+
+\begin_layout Standard
+\noindent
+3 [ 37 21 43] 99.76Al 0.43Fe 57.35 22 
+\end_layout
+
+\begin_layout Standard
+\noindent
+4 [ 7 44 34] 99.50Al 0.40Fe 48.71 37 
+\end_layout
+
+\begin_layout Standard
+\noindent
+5 [ 29 9 35] 99.50Al 0.53Fe 48.71 26 
+\end_layout
+
+\begin_layout Standard
+\noindent
+6 [ 16 17 22] 99.55Al 0.50Fe 48.71 6 
+\end_layout
+
+\begin_layout Standard
+\noindent
+7 [ 5 24 6] 99.76Al 0.44Fe 57.35 19 
+\end_layout
+
+\begin_layout Standard
+\noindent
+8 [ 1 3 4] 99.77Al 0.29Fe 57.35 3 
+\end_layout
+
+\begin_layout Standard
+\noindent
+9 [ 28 40 27] 99.76Al 0.43Fe 57.35 13 
+\end_layout
+
+\begin_layout Standard
+\noindent
+10 [ 2 31 38] 99.41Al 0.55Fe 44.53 36 
+\end_layout
+
+\begin_layout Standard
+\noindent
+11 [ 39 25 32] 99.27Al 0.76Fe 41.53 14 
+\end_layout
+
+\begin_layout Standard
+\noindent
+12 [ 14 42 36] 99.52Al 0.44Fe 48.71 28 
+\end_layout
+
+\begin_layout Standard
+\noindent
+13 [ 8 19 12] 99.39Al 0.65Fe 44.53 11 
+\end_layout
+
+\begin_layout Standard
+\noindent
+14 [ 46 11 48] 99.59Al 0.35Fe 48.71 37 
+\end_layout
+
+\begin_layout Standard
+\noindent
+15 [ 30 45 10] 99.76Al 0.45Fe 57.35 35 
+\end_layout
+
+\begin_layout Standard
+\noindent
+16 [ 49 23 47] 99.36Al 0.72Fe 44.53 26 
+\end_layout
+
+\begin_layout Standard
+\noindent
+17 [ 20 50 51] 99.26Al 0.49Fe 41.53 31
+\end_layout
+
+\begin_layout Standard
+\noindent
+Sum,Max= 848.83,37
+\end_layout
+
+\begin_layout Subsection
+3C - DoRepeatedAscents(200)
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ENGSCI 760 Heuristics Assignment 2021 code/Heuristics code/DoRepeatedAscents.png
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+DoRepeatedAscents(n=200) Plot
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Solution Output:
+\end_layout
+
+\begin_layout Standard
+1 [ 20 5 34] 99.53Al 0.52Fe 48.71 29 
+\end_layout
+
+\begin_layout Standard
+2 [ 22 11 2] 99.35Al 0.51Fe 44.53 20 
+\end_layout
+
+\begin_layout Standard
+3 [ 37 24 40] 99.86Al 0.33Fe 68.21 16 
+\end_layout
+
+\begin_layout Standard
+4 [ 30 42 18] 99.75Al 0.44Fe 57.35 24 
+\end_layout
+
+\begin_layout Standard
+5 [ 46 45 28] 99.75Al 0.46Fe 57.35 18 
+\end_layout
+
+\begin_layout Standard
+6 [ 21 29 17] 99.50Al 0.43Fe 48.71 12 
+\end_layout
+
+\begin_layout Standard
+7 [ 44 39 23] 99.35Al 0.66Fe 44.53 21 
+\end_layout
+
+\begin_layout Standard
+8 [ 38 4 1] 99.77Al 0.46Fe 57.35 37 
+\end_layout
+
+\begin_layout Standard
+9 [ 49 15 25] 99.36Al 0.61Fe 44.53 34 
+\end_layout
+
+\begin_layout Standard
+10 [ 35 50 13] 99.25Al 0.72Fe 41.53 37 
+\end_layout
+
+\begin_layout Standard
+11 [ 47 3 32] 99.50Al 0.53Fe 48.71 44 
+\end_layout
+
+\begin_layout Standard
+12 [ 8 27 12] 99.50Al 0.52Fe 48.71 19 
+\end_layout
+
+\begin_layout Standard
+13 [ 16 48 14] 99.51Al 0.48Fe 48.71 34 
+\end_layout
+
+\begin_layout Standard
+14 [ 41 6 10] 99.77Al 0.45Fe 57.35 35 
+\end_layout
+
+\begin_layout Standard
+15 [ 9 51 7] 99.50Al 0.38Fe 48.71 44 
+\end_layout
+
+\begin_layout Standard
+16 [ 26 36 33] 99.51Al 0.52Fe 48.71 10 
+\end_layout
+
+\begin_layout Standard
+17 [ 19 31 43] 99.51Al 0.47Fe 48.71 24 
+\end_layout
+
+\begin_layout Standard
+Sum,Max= 862.41,44
+\end_layout
+
 \begin_layout Section
+\noindent
 Question 4
 \end_layout
 
 \begin_layout Subsection
+\noindent
 a)
 \end_layout
 
 \begin_layout Standard
-Would expect this problem to have a lot of plateaus
-\end_layout
-
-\begin_layout Standard
-WHY?
+\noindent
+I would expect this problem to have a lot of plateaus.
+ In order for the price of a crucible to change, it needs to change grade
+ from one category to another.
+ This can be difficult as it is unlikely that a single swap of pots between
+ crucibles to increase the average aluminum or decrease the average iron
+ enough to change the category.
+ Each pot only has 33% of the contribution to the average, so to increase
+ the aluminum from 99.1% => 99.2% requires a change of 0.3% for a single pot.
+ If there were more pots per crucible then the problem would be even greater.
 \end_layout
 
 \begin_layout Subsection
+\noindent
 b)
 \end_layout
 
 \begin_layout Standard
-Add slope to plateaus by including standard deviation change 
+\noindent
+Word definition: Use the original g function plus the mean Aluminium percentage
+ minus the mean Iron percentage.
 \end_layout
 
 \begin_layout Standard
-The logic for this is that its more desirable to have Fe and Al values which
- are similar to each other in the same crucible as this will minimise the
- 
-\begin_inset Quotes eld
+\noindent
+Formal definition: 
+\begin_inset Formula $g'(\overline{Al},\overline{Fe})=g(\overline{Al},\overline{Fe})+(\overline{Al}-\overline{Fe})/100$
 \end_inset
 
-waste
-\begin_inset Quotes erd
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+The logic for this is that its more desirable to have a higher Al value
+ and a lower Fe value, so we should reward higher Al values and penalise
+ higher Fe values.
+\end_layout
+
+\begin_layout Standard
+Example:
+\end_layout
+
+\begin_layout Standard
+Solution 1: 
+\begin_inset Formula $\overline{Al}=99.1,\overline{Fe}=0.06,g(\overline{Al},\overline{Fe})=36,g'(\overline{Al},\overline{Fe})=36.931$
 \end_inset
 
- of a potentially very good pot or prevent a particularly bad pot bringing
- down good pots
+
+\end_layout
+
+\begin_layout Standard
+Solution 2: 
+\begin_inset Formula $\overline{Al}=99.1,\overline{Fe}=0.01,g(\overline{Al},\overline{Fe})=36,g'(\overline{Al},\overline{Fe})=36.981$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As shown, the crucible with the same Aluminum percentage but with a lower
+ Iron percentage was given a higher value than the alternative even though
+ they both are originally in the same category.
+ A crucible with a higher Aluminium or lower Iron percentage should be given
+ a greater value during search as this will push the algorithm towards solutions
+ that push the crucible into higher categories which yields greater profit.
 \end_layout
 
 \begin_layout Subsection
+\noindent
 c)
 \end_layout
 
 \begin_layout Standard
-Unsure the answer to this...
+\noindent
+The recalculation may be avoided when the same two pots are being considered
+ for a swap while in the same crucibles.
+ As this swapping has been considered before, we know whether it improved
+ the overall price already.
+\end_layout
+
+\begin_layout Standard
+e.g.
+ Swapping 1 and 5 with crucibles (1,2,3) and (4,5,6)
 \end_layout
 
 \begin_layout Section
+\noindent
 Question 5
 \end_layout
 
 \begin_layout Subsection
+\noindent
 a)
 \end_layout
 
 \begin_layout Standard
+\noindent
 \begin_inset Formula $g''(\overline{Al},\overline{Fe},x_{c1},x_{c2},x_{c3},s)=if\,max(x_{c1},x_{c2},x_{c3})-min(x_{c1},x_{c2},x_{c3})>=s:g(\overline{Al},\overline{Fe})\times\frac{s}{max(x_{c1},x_{c2},x_{c3})-min(x_{c1},x_{c2},x_{c3})}$
 \end_inset
 
@@ -247,6 +573,7 @@ a)
 \end_layout
 
 \begin_layout Standard
+\noindent
 else 
 \begin_inset Formula $g(\overline{Al},\overline{Fe})$
 \end_inset
@@ -255,250 +582,317 @@ else
 \end_layout
 
 \begin_layout Subsection
+\noindent
 b)
 \end_layout
 
 \begin_layout Subsection
+\noindent
 c)
 \end_layout
 
 \begin_layout Subsubsection
+\noindent
 Max Spread 6
 \end_layout
 
 \begin_layout Standard
+\noindent
 Solution Output:
 \end_layout
 
 \begin_layout Standard
+\noindent
 1 [ 35 36 41] 99.64Al 0.51Fe 48.71 6 
 \end_layout
 
 \begin_layout Standard
+\noindent
 2 [ 37 40 34] 99.76Al 0.36Fe 57.35 6 
 \end_layout
 
 \begin_layout Standard
+\noindent
 3 [ 14 17 18] 99.66Al 0.42Fe 52.44 4 
 \end_layout
 
 \begin_layout Standard
+\noindent
 4 [ 6 5 2] 99.55Al 0.53Fe 48.71 4 
 \end_layout
 
 \begin_layout Standard
+\noindent
 5 [ 22 19 25] 99.35Al 0.74Fe 41.53 6 
 \end_layout
 
 \begin_layout Standard
+\noindent
 6 [ 3 4 1] 99.77Al 0.29Fe 57.35 3 
 \end_layout
 
 \begin_layout Standard
+\noindent
 7 [ 49 44 50] 99.26Al 0.49Fe 41.53 6 
 \end_layout
 
 \begin_layout Standard
+\noindent
 8 [ 15 12 11] 99.52Al 0.50Fe 48.71 4 
 \end_layout
 
 \begin_layout Standard
+\noindent
 9 [ 48 46 43] 99.75Al 0.41Fe 57.35 5 
 \end_layout
 
 \begin_layout Standard
+\noindent
 10 [ 13 16 10] 99.41Al 0.71Fe 44.53 6 
 \end_layout
 
 \begin_layout Standard
+\noindent
 11 [ 39 38 33] 99.37Al 0.69Fe 44.53 6 
 \end_layout
 
 \begin_layout Standard
+\noindent
 12 [ 20 23 26] 99.53Al 0.72Fe 44.53 6 
 \end_layout
 
 \begin_layout Standard
+\noindent
 13 [ 7 9 8] 99.50Al 0.44Fe 48.71 2 
 \end_layout
 
 \begin_layout Standard
+\noindent
 14 [ 27 31 32] 99.55Al 0.50Fe 48.71 5 
 \end_layout
 
 \begin_layout Standard
+\noindent
 15 [ 42 47 45] 99.51Al 0.37Fe 48.71 5 
 \end_layout
 
 \begin_layout Standard
+\noindent
 16 [ 28 30 24] 99.77Al 0.38Fe 57.35 6 
 \end_layout
 
 \begin_layout Standard
+\noindent
 17 [ 21 51 29] 99.37Al 0.42Fe 44.53 30
 \end_layout
 
 \begin_layout Standard
+\noindent
 Sum,Max= 835.28,30
 \end_layout
 
 \begin_layout Subsubsection
+\noindent
 Max Spread 8
 \end_layout
 
 \begin_layout Standard
+\noindent
 Solution Output:
 \end_layout
 
 \begin_layout Standard
+\noindent
 1 [ 44 49 51] 99.30Al 0.31Fe 41.53 7 
 \end_layout
 
 \begin_layout Standard
+\noindent
 2 [ 10 16 13] 99.41Al 0.71Fe 44.53 6 
 \end_layout
 
 \begin_layout Standard
+\noindent
 3 [ 31 26 23] 99.50Al 0.49Fe 48.71 8 
 \end_layout
 
 \begin_layout Standard
+\noindent
 4 [ 15 11 12] 99.52Al 0.50Fe 48.71 4 
 \end_layout
 
 \begin_layout Standard
+\noindent
 5 [ 39 33 32] 99.35Al 0.70Fe 44.53 7 
 \end_layout
 
 \begin_layout Standard
+\noindent
 6 [ 27 19 25] 99.40Al 0.67Fe 44.53 8 
 \end_layout
 
 \begin_layout Standard
+\noindent
 7 [ 29 28 21] 99.50Al 0.51Fe 48.71 8 
 \end_layout
 
 \begin_layout Standard
+\noindent
 8 [ 41 40 35] 99.77Al 0.43Fe 57.35 6 
 \end_layout
 
 \begin_layout Standard
+\noindent
 9 [ 18 17 24] 99.78Al 0.41Fe 57.35 7 
 \end_layout
 
 \begin_layout Standard
+\noindent
 10 [ 43 48 46] 99.75Al 0.41Fe 57.35 5 
 \end_layout
 
 \begin_layout Standard
+\noindent
 11 [ 2 5 4] 99.55Al 0.47Fe 48.71 3 
 \end_layout
 
 \begin_layout Standard
+\noindent
 12 [ 14 20 22] 99.51Al 0.70Fe 44.53 8 
 \end_layout
 
 \begin_layout Standard
+\noindent
 13 [ 9 8 7] 99.50Al 0.44Fe 48.71 2 
 \end_layout
 
 \begin_layout Standard
+\noindent
 14 [ 42 34 36] 99.54Al 0.46Fe 48.71 8 
 \end_layout
 
 \begin_layout Standard
+\noindent
 15 [ 50 47 45] 99.37Al 0.52Fe 44.53 5 
 \end_layout
 
 \begin_layout Standard
+\noindent
 16 [ 30 38 37] 99.75Al 0.41Fe 57.35 8 
 \end_layout
 
 \begin_layout Standard
+\noindent
 17 [ 1 3 6] 99.77Al 0.34Fe 57.35 5 
 \end_layout
 
 \begin_layout Standard
+\noindent
 Sum,Max= 843.19, 8
 \end_layout
 
 \begin_layout Standard
+\noindent
 
 \end_layout
 
 \begin_layout Subsubsection
+\noindent
 Max Spread 11
 \end_layout
 
 \begin_layout Standard
+\noindent
+Solution Output:
+\end_layout
+
+\begin_layout Standard
+\noindent
 1 [ 11 19 20] 99.38Al 0.64Fe 44.53 9 
 \end_layout
 
 \begin_layout Standard
+\noindent
 2 [ 38 37 30] 99.75Al 0.41Fe 57.35 8 
 \end_layout
 
 \begin_layout Standard
+\noindent
 3 [ 15 8 6] 99.58Al 0.49Fe 48.71 9 
 \end_layout
 
 \begin_layout Standard
+\noindent
 4 [ 47 49 51] 99.27Al 0.43Fe 41.53 4 
 \end_layout
 
 \begin_layout Standard
+\noindent
 5 [ 29 28 21] 99.50Al 0.51Fe 48.71 8 
 \end_layout
 
 \begin_layout Standard
+\noindent
 6 [ 24 17 18] 99.78Al 0.41Fe 57.35 7 
 \end_layout
 
 \begin_layout Standard
+\noindent
 7 [ 1 10 9] 99.75Al 0.37Fe 57.35 9 
 \end_layout
 
 \begin_layout Standard
+\noindent
 8 [ 7 5 16] 99.53Al 0.45Fe 48.71 11 
 \end_layout
 
 \begin_layout Standard
+\noindent
 9 [ 40 34 43] 99.76Al 0.45Fe 57.35 9 
 \end_layout
 
 \begin_layout Standard
+\noindent
 10 [ 22 33 26] 99.51Al 0.51Fe 48.71 11 
 \end_layout
 
 \begin_layout Standard
+\noindent
 11 [ 2 3 4] 99.58Al 0.51Fe 48.71 2 
 \end_layout
 
 \begin_layout Standard
+\noindent
 12 [ 50 42 39] 99.25Al 0.52Fe 41.53 11 
 \end_layout
 
 \begin_layout Standard
+\noindent
 13 [ 44 35 36] 99.53Al 0.53Fe 48.71 9 
 \end_layout
 
 \begin_layout Standard
+\noindent
 14 [ 32 27 31] 99.55Al 0.50Fe 48.71 5 
 \end_layout
 
 \begin_layout Standard
+\noindent
 15 [ 14 23 25] 99.35Al 0.65Fe 44.53 11 
 \end_layout
 
 \begin_layout Standard
+\noindent
 16 [ 41 46 45] 99.80Al 0.42Fe 57.35 5 
 \end_layout
 
 \begin_layout Standard
+\noindent
 17 [ 13 48 12] 99.40Al 0.69Fe 44.53 36 
 \end_layout
 
 \begin_layout Standard
+\noindent
 Sum,Max= 844.37,36
 \end_layout
 

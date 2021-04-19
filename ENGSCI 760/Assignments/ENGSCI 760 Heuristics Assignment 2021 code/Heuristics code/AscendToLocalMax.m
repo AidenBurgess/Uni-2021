@@ -1,5 +1,5 @@
 function [SolutionValue, bestSolution, solutionsOverTime] = AscendToLocalMax(x, NoPots, PotAl, PotFe, PotsPerCrucible, NoCrucibles, NoQualities, QualityMinAl, QualityMaxFe, QualityValue)
-%numSolutions = 1;
+numSolutions = 1;
 solutionsOverTime = [];
 maxSpread = 11;
 while true
@@ -26,8 +26,8 @@ while true
             if increaseInValue >= 0
                 x = y;
             end
-            %solutionsOverTime(numSolutions) = SolutionValue + increaseInValue;
-            %numSolutions = numSolutions + 1;
+            solutionsOverTime(numSolutions) = SolutionValue + increaseInValue;
+            numSolutions = numSolutions + 1;
         end
     end
     newPrice = CalcSolutionValue(x, PotAl , PotFe, PotsPerCrucible, NoCrucibles, NoQualities, QualityMinAl, QualityMaxFe, QualityValue);

@@ -6,6 +6,7 @@ function main()
           QualityMinAl, QualityMaxFe, QualityValue] = InitQual;
   [PotAl, PotFe] = InitProb;
   
-  DoRepeatedAscents(2000, NoPots, PotAl, PotFe, PotsPerCrucible, NoCrucibles, NoQualities, QualityMinAl, QualityMaxFe, QualityValue);
+  %TestAscendToLocalMax(PotAl, PotFe, NoCrucibles,NoPots,PotsPerCrucible,NoQualities, QualityMinAl, QualityMaxFe, QualityValue)
+  DoRepeatedAscents(200, NoPots, PotAl, PotFe, PotsPerCrucible, NoCrucibles, NoQualities, QualityMinAl, QualityMaxFe, QualityValue);
 
 end
