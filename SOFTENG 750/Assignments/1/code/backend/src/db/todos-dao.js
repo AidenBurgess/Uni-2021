@@ -8,26 +8,31 @@ import { Todo } from "./todos-schema";
 // TODO Exercise Three: Implement the five functions below.
 
 export async function createTodo(todo) {
-    const dbTodo = new Todo(todo);
-    await dbTodo.save();
-    return dbTodo;
+	const dbTodo = new Todo(todo);
+	await dbTodo.save();
+	return dbTodo;
 }
 
-export async function retrieveAllTodos() {
-    return await Todo.find();
+export async function retrieveAllTodos(user) {
+	return await Todo.find({ user });
 }
 
-export async function retrieveTodo(id) {
-    return await Todo.findById(id);
+export async function retrieveTodo(id, user) {
+	return await Todo.findOne({ _id: id, user: user });
 }
 
-// A much cleaner way of updating the data compared to the way shown in the video and previous examples...
-export async function updateTodo(todo) {
-
-    const result = await Todo.findByIdAndUpdate(todo._id, todo, { new: true, useFindAndModify: false });
-    return result ? true : false;
+export async function updateTodo(todo, user) {
+	const result = await Todo.findOneAndUpdate(
+		{ _id: todo._id, user: user },
+		todo,
+		{
+			new: true,
+			useFindAndModify: false,
+		}
+	);
+	return result ? true : false;
 }
 
-export async function deleteTodo(id) {
-    await Todo.deleteOne({ _id: id });
+export async function deleteTodo(id, user) {
+	await Todo.deleteOne({ _id: id, user: user });
 }

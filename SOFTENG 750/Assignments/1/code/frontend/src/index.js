@@ -16,13 +16,13 @@ dayjs.extend(localizedFormat);
 
 ReactDOM.render(
 	<MuiPickersUtilsProvider utils={DayjsUtils}>
-		<BrowserRouter>
-			<AppContextProvider>
-				<Auth0ProviderWithHistory>
+		<Auth0ProviderWithHistory>
+			<BrowserRouter>
+				<AppContextProvider>
 					<App />
-				</Auth0ProviderWithHistory>
-			</AppContextProvider>
-		</BrowserRouter>
+				</AppContextProvider>
+			</BrowserRouter>
+		</Auth0ProviderWithHistory>
 	</MuiPickersUtilsProvider>,
 	document.getElementById("root")
 );

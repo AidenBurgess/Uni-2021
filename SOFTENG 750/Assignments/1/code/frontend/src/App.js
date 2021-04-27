@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
 	const classes = useStyles();
-	const { isLoading, isAuthenticated, loginWithRedirect } = useAuth0();
+	const { isLoading, isAuthenticated, loginWithRedirect, user } = useAuth0();
 
 	return (
 		<>
@@ -45,8 +45,9 @@ function App() {
 					) : isAuthenticated ? (
 						<TodoList />
 					) : (
-						loginWithRedirect()
+						<LoginButton />
 					)}
+					<p>{JSON.stringify(user, null, 2)}</p>
 				</main>
 			</Container>
 		</>
