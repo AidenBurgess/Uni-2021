@@ -22,10 +22,13 @@ function PressedButton(props) {
 			}
 		}
 		getPressed();
-	}, []);
+	}, [endpoint]);
 
 	async function togglePressed() {
-		emojisplosion({ emojis });
+		emojisplosion({
+			emojis,
+			emojiCount: 50,
+		});
 		setPressed(!pressed);
 		await axios.put(endpoint);
 	}
