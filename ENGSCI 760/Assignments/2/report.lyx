@@ -4206,5 +4206,22 @@ Therefore, A, B, C are mutually independent events, as the product of individual
 Markov Chains
 \end_layout
 
+\begin_layout Subsection
+Step One Markov Transition Matrix
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\begin{array}{ccccc}
+\\
+\\
+\\
+\\
+\\
+\end{array}$
+\end_inset
+
+
+\end_layout
+
 \end_body
 \end_document
