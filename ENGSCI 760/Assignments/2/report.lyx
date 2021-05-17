@@ -4261,7 +4261,7 @@ Working here:
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -5178,7 +5178,162 @@ Hidden Markov Model
 \end_layout
 
 \begin_layout Subsection
-See Code
+constructEmissions()
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+def constructEmissions(pr_correct, adj):
+\end_layout
+
+\begin_layout Plain Layout
+
+    # This function takes in a matrix detailing the adjacent letters on
+ a keyboard, and the
+\end_layout
+
+\begin_layout Plain Layout
+
+    #  probability of hitting the correct key and outputs a matrix of emission
+ probabilities
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+
+    #
+\end_layout
+
+\begin_layout Plain Layout
+
+    # INPUT
+\end_layout
+
+\begin_layout Plain Layout
+
+    # pr_correct - the probability of correctly hitting the intended key;
+\end_layout
+
+\begin_layout Plain Layout
+
+    # adj - a 26 x 26 matrix with adj[i][j] = 1 if the i'th letter in the
+ alphabet is adjacent
+\end_layout
+
+\begin_layout Plain Layout
+
+    # to the j'th letter.
+\end_layout
+
+\begin_layout Plain Layout
+
+    #
+\end_layout
+
+\begin_layout Plain Layout
+
+    # OUTPUT
+\end_layout
+
+\begin_layout Plain Layout
+
+    # b - a 26 x 26 matrix with b[i][j] being the probability of hitting
+ key j if you intended
+\end_layout
+
+\begin_layout Plain Layout
+
+    # to hit key i (the probabilities of hitting all adjacent keys are identical
+).
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    # Initialise empty 26x26 array
+\end_layout
+
+\begin_layout Plain Layout
+
+    b = [[0 for i in range(26)] for j in range(26)]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    for i, row in enumerate(adj):
+\end_layout
+
+\begin_layout Plain Layout
+
+        # Get number of keys by adding together all 1's
+\end_layout
+
+\begin_layout Plain Layout
+
+        num_keys = sum(row)
+\end_layout
+
+\begin_layout Plain Layout
+
+        # Calculate probability for remaining keys
+\end_layout
+
+\begin_layout Plain Layout
+
+        prob_rest = (1-pr_correct)/(num_keys)
+\end_layout
+
+\begin_layout Plain Layout
+
+        for j, letter in enumerate(row):
+\end_layout
+
+\begin_layout Plain Layout
+
+            if i == j:
+\end_layout
+
+\begin_layout Plain Layout
+
+                # Intended key has different probability
+\end_layout
+
+\begin_layout Plain Layout
+
+                b[i][j] = pr_correct
+\end_layout
+
+\begin_layout Plain Layout
+
+            elif letter == 1:
+\end_layout
+
+\begin_layout Plain Layout
+
+                b[i][j] = prob_rest
+\end_layout
+
+\begin_layout Plain Layout
+
+    return b
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section

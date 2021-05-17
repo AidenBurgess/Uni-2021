@@ -11,14 +11,19 @@ def constructEmissions(pr_correct, adj):
     # b - a 26 x 26 matrix with b[i][j] being the probability of hitting key j if you intended
     # to hit key i (the probabilities of hitting all adjacent keys are identical).
 
+    # Initialise empty 26x26 array
     b = [[0 for i in range(26)] for j in range(26)]
+
     for i, row in enumerate(adj):
+        # Get number of keys by adding together all 1's
         num_keys = sum(row)
-        prob_rest = pr_correct/(num_keys)
+        # Calculate probability for remaining keys
+        prob_rest = (1-pr_correct)/(num_keys)
         for j, letter in enumerate(row):
             if i == j:
+                # Intended key has different probability
                 b[i][j] = pr_correct
-            if letter == 1:
+            elif letter == 1:
                 b[i][j] = prob_rest
     return b
 
@@ -40,19 +45,21 @@ def constructTransitions(filename):
     # Read the file into a sting called text
     with open(filename, 'r') as myfile:
         text = myfile.read()
-        import re
         # Your code goes here.
+        import re
+        # Initialise empty 26x26 array to store counts of each letter transition
         counts = [[0 for i in range(26)] for j in range(26)]
         for word in text.split():
+            # Remove any punctuation/whitespace
             word = re.sub(r'\W+', '', word)
+            # Index by 0, i.e. a: 0, b: 1...
             prev = ord(word[0]) - 97
             for letter in word[1:]:
                 letter = ord(letter) - 97
                 counts[prev][letter] += 1
                 prev = letter
 
-    total_per_char = [sum(count) for count in counts]
-
+    # Intialise empty 26x26 array to store percentages of each letter transition
     p = [[0 for i in range(26)] for j in range(26)]
     for starting_letter, row in enumerate(counts):
         total_per_row = sum(row)
@@ -127,20 +134,6 @@ def HMM(p, pi, b, y):
         x[i] = (phi[x[i+1], i+1])
         pass
     return x
-
-
-def probabilityOfCorrectKey(adj):
-    # Assume 50% chance hitting intended key, and even distribution for the rest
-    pr_correct = [row[:] for row in adj]
-    for i, row in enumerate(pr_correct):
-        num_keys = sum(row)
-        prob_rest = 0.5/(num_keys)
-        for j, letter in enumerate(row):
-            if i == j:
-                pr_correct[i][j] = 0.5
-            if letter == 1:
-                pr_correct[i][j] = prob_rest
-    return pr_correct
 
 
 def main():
