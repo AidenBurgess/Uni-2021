@@ -47,7 +47,6 @@ function App() {
 					) : (
 						<LoginButton />
 					)}
-					<p>{JSON.stringify(user, null, 2)}</p>
 				</main>
 			</Container>
 		</>

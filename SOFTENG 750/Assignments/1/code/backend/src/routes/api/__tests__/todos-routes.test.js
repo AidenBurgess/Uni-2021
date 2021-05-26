@@ -7,15 +7,34 @@ import connectToDatabase from "../../../db/db-connect";
 import { Todo } from "../../../db/todos-schema";
 import dayjs from "dayjs";
 import { getToken } from "../fixtures";
+import checkJwt from "./../../../auth/jwt";
 const request = require("request-promise-native");
+const nock = require("nock");
 
 let mongod, app, server;
 
-// jest.setTimeout(100000);
+const nockReply = {
+	keys: [
+		{
+			alg: "RS256",
+			kty: "RSA",
+			use: "sig",
+			n: "x8ezF9UB_OgRSnRy-NRYbCw6r7gwsE9U4jyn85QqbJkS-t964HDcAlCJIDmunodIVGHqVGK3YV8JGSXyBHGXeicAT_OO0Yz05neCvlvvGlRNYVeKKNjkZM2McELWCXaPTFhfqkW_xitWlJSx6wSt26_fH7LBYYX-ywq9fSCXTvdIhbIbPLMfPmXvxNprNfz4VzXeNpr9oYdshsY_oELl1d13rE2TuHtTvjlgMyqPkqkigaifWd1qR5CdFpDp6FoxGa7IaDkCIQEnVplf3rnyBkfwis0lN25S1GFEZbKF3eRix7DiXj7HTBkaCUc8BSZOK118u5tc0cQdIOBzANQyBQ", //eslint-disable-line max-len
+			e: "AQAB",
+			kid: "0",
+		},
+	],
+};
+
+nock("https://dev-aids.au.auth0.com/")
+	.persist()
+	.get("/.well-known/jwks.json")
+	.reply(200, nockReply);
 
 // Some dummy data to test with
-const overdueTodo = {
+const anotherUserTodo = {
 	_id: new mongoose.mongo.ObjectId("000000000000000000000002"),
+	user: "another@gmail.com",
 	title: "OverdueTitle",
 	description: "OverdueDesc",
 	isComplete: false,
@@ -24,6 +43,7 @@ const overdueTodo = {
 
 const upcomingTodo = {
 	_id: new mongoose.mongo.ObjectId("000000000000000000000003"),
+	user: "someone@gmail.com",
 	title: "UpcomingTitle",
 	description: "UpcomingDesc",
 	isComplete: false,
@@ -32,13 +52,14 @@ const upcomingTodo = {
 
 const completeTodo = {
 	_id: new mongoose.mongo.ObjectId("000000000000000000000004"),
+	user: "someone@gmail.com",
 	title: "CompleteTitle",
 	description: "CompleteDesc",
 	isComplete: true,
 	dueDate: dayjs().format(),
 };
 
-const dummyTodos = [overdueTodo, upcomingTodo, completeTodo];
+const dummyTodos = [anotherUserTodo, upcomingTodo, completeTodo];
 
 // Start database and server before any tests run
 beforeAll(async (done) => {
@@ -49,18 +70,20 @@ beforeAll(async (done) => {
 	app = express();
 	app.use(express.json());
 	app.use("/api/todos", routes);
+
 	server = app.listen(3000, done);
 });
 
-// // Populate database with dummy data before each test
-// beforeEach(async () => {
-// 	await Todo.insertMany(dummyTodos);
-// });
+// Populate database with dummy data before each test
+beforeEach(async () => {
+	// await Todo.insert
+	await Todo.insertMany(dummyTodos);
+});
 
-// // Clear database after each test
-// afterEach(async () => {
-// 	await Todo.deleteMany({});
-// });
+// Clear database after each test
+afterEach(async () => {
+	await Todo.deleteMany({});
+});
 
 // Stop db and server before we finish
 afterAll((done) => {
@@ -71,248 +94,398 @@ afterAll((done) => {
 	});
 });
 
-const makeAuthdRequest = async (method, uri, body) => {
+const getHeader = () => {
 	const token = getToken();
-
-	const options = {
-		baseUrl: `http://localhost:3000`,
-		method,
-		uri,
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
-		resolveWithFullResponse: true,
-		json: true,
-	};
-
-	if (body) options.body = body;
-
-	const response = await request(options);
-
-	return response;
-};
-
-it("retrieves all todos successfully", async () => {
-	const token = getToken();
-	console.log(token);
 	const header = {
 		headers: {
 			authorization: `Bearer ${token}`,
 		},
 	};
-	const response = await axios.get("http://localhost:3001/api/todos", header);
-	// const response = await makeAuthdRequest("GET", "api/todos");
-	console.log(response);
+	return header;
+};
+
+const validateTodo = (expectedTodo, actualTodo, checkId = true) => {
+	if (checkId) {
+		expect(expectedTodo._id.toString()).toEqual(actualTodo._id.toString());
+	}
+	expect(expectedTodo.user).toEqual(actualTodo.user);
+	expect(expectedTodo.title).toEqual(actualTodo.title);
+	expect(expectedTodo.description).toEqual(actualTodo.description);
+	expect(expectedTodo.isComplete).toEqual(actualTodo.isComplete);
+	expect(dayjs(expectedTodo.dueDate)).toEqual(dayjs(actualTodo.dueDate));
+};
+
+it("retrieves all todos successfully", async () => {
+	const response = await axios.get(
+		"http://localhost:3000/api/todos/",
+		getHeader()
+	);
+
 	expect(response.status).toBe(200);
 	const responseTodos = response.data;
-	expect(responseTodos.length).toBe(3);
+	// Two of the todos are our own
+	expect(responseTodos.length).toBe(2);
 
-	for (let i = 0; i < responseTodos.length; i++) {
-		const responseTodo = responseTodos[i];
+	// First todo is not our own so exclude that from being checked
+	for (let i = 1; i < responseTodos.length; i++) {
+		const responseTodo = responseTodos[i - 1];
 		const expectedTodo = dummyTodos[i];
-
-		expect(responseTodo._id.toString()).toEqual(
-			expectedTodo._id.toString()
-		);
-		expect(responseTodo.title).toEqual(expectedTodo.title);
-		expect(responseTodo.description).toEqual(expectedTodo.description);
-		expect(responseTodo.isComplete).toEqual(expectedTodo.isComplete);
-		expect(dayjs(responseTodo.dueDate)).toEqual(
-			dayjs(expectedTodo.dueDate)
-		);
+		validateTodo(expectedTodo, responseTodo);
 	}
 });
 
-// it("retrieves a single todo successfully", async () => {
-// 	const response = await axios.get(
-// 		"http://localhost:3000/api/todos/000000000000000000000003"
-// 	);
-// 	expect(response.status).toBe(200);
+it("retrieves a single todo successfully", async () => {
+	const response = await axios.get(
+		"http://localhost:3000/api/todos/000000000000000000000003",
+		getHeader()
+	);
+	expect(response.status).toBe(200);
 
-// 	const responseTodo = response.data;
-// 	expect(responseTodo._id.toString()).toEqual(upcomingTodo._id.toString());
-// 	expect(responseTodo.title).toEqual(upcomingTodo.title);
-// 	expect(responseTodo.description).toEqual(upcomingTodo.description);
-// 	expect(responseTodo.isComplete).toEqual(upcomingTodo.isComplete);
-// 	expect(dayjs(responseTodo.dueDate)).toEqual(dayjs(upcomingTodo.dueDate));
-// });
+	const responseTodo = response.data;
+	validateTodo(upcomingTodo, responseTodo);
+});
 
-// it("returns a 404 when attempting to retrieve a nonexistant todo (valid id)", async () => {
-// 	try {
-// 		await axios.get(
-// 			"http://localhost:3000/api/todos/000000000000000000000001"
-// 		);
-// 		fail("Should have thrown an exception.");
-// 	} catch (err) {
-// 		const { response } = err;
-// 		expect(response).toBeDefined();
-// 		expect(response.status).toBe(404);
-// 	}
-// });
+it("returns a 404 when attempting to retrieve a nonexistant todo (valid id)", async () => {
+	try {
+		await axios.get(
+			"http://localhost:3000/api/todos/000000000000000000000001",
+			getHeader()
+		);
+		fail("Should have thrown an exception.");
+	} catch (err) {
+		const { response } = err;
+		expect(response).toBeDefined();
+		expect(response.status).toBe(404);
+	}
+});
 
-// it("returns a 400 when attempting to retrieve a nonexistant todo (invalid id)", async () => {
-// 	try {
-// 		await axios.get("http://localhost:3000/api/todos/blah");
-// 		fail("Should have thrown an exception.");
-// 	} catch (err) {
-// 		const { response } = err;
-// 		expect(response).toBeDefined();
-// 		expect(response.status).toBe(400);
-// 		expect(response.data).toBe("Invalid ID");
-// 	}
-// });
+it("returns a 400 when attempting to retrieve a nonexistant todo (invalid id)", async () => {
+	try {
+		await axios.get("http://localhost:3000/api/todos/blah", getHeader());
+		fail("Should have thrown an exception.");
+	} catch (err) {
+		const { response } = err;
+		expect(response).toBeDefined();
+		expect(response.status).toBe(400);
+		expect(response.data).toBe("Invalid ID");
+	}
+});
 
-// it("Creates a new todo", async () => {
-// 	const newTodo = {
-// 		title: "NewTodo",
-// 		description: "NewDesc",
-// 		isComplete: false,
-// 		dueDate: dayjs("2100-01-01").format(),
-// 	};
+it("Creates a new todo", async () => {
+	const newTodo = {
+		user: "someone@gmail.com",
+		title: "NewTodo",
+		description: "NewDesc",
+		isComplete: false,
+		dueDate: dayjs("2100-01-01").format(),
+	};
 
-// 	const response = await axios.post(
-// 		"http://localhost:3000/api/todos",
-// 		newTodo
-// 	);
+	const response = await axios.post(
+		"http://localhost:3000/api/todos",
+		newTodo,
+		getHeader()
+	);
 
-// 	// Check response is as expected
-// 	expect(response.status).toBe(201);
-// 	expect(response.data).toBeDefined();
-// 	const rTodo = response.data;
-// 	expect(rTodo.title).toBe("NewTodo");
-// 	expect(rTodo.description).toBe("NewDesc");
-// 	expect(rTodo.isComplete).toBe(false);
-// 	expect(dayjs(rTodo.dueDate)).toEqual(dayjs("2100-01-01"));
-// 	expect(rTodo._id).toBeDefined();
-// 	expect(response.headers.location).toBe(`/api/todos/${rTodo._id}`);
+	// Check response is as expected
+	expect(response.status).toBe(201);
+	expect(response.data).toBeDefined();
 
-// 	// Check that the todo was actually added to the database
-// 	const dbTodo = await Todo.findById(rTodo._id);
-// 	expect(dbTodo.title).toBe("NewTodo");
-// 	expect(dbTodo.description).toBe("NewDesc");
-// 	expect(dbTodo.isComplete).toBe(false);
-// 	expect(dayjs(dbTodo.dueDate)).toEqual(dayjs("2100-01-01"));
-// });
+	const rTodo = response.data;
+	validateTodo(newTodo, rTodo, false);
+	expect(rTodo._id).toBeDefined();
+	expect(response.headers.location).toBe(`/api/todos/${rTodo._id}`);
 
-// it("Gives a 400 when trying to create a todo with no title", async () => {
-// 	try {
-// 		const newTodo = {
-// 			description: "NewDesc",
-// 			isComplete: false,
-// 			dueDate: dayjs("2100-01-01").format(),
-// 		};
+	// Check that the todo was actually added to the database
+	const dbTodo = await Todo.findById(rTodo._id);
+	validateTodo(newTodo, dbTodo, false);
+});
 
-// 		await axios.post("http://localhost:3000/api/todos", newTodo);
-// 		fail("Should have thrown an exception.");
-// 	} catch (err) {
-// 		// Ensure response is as expected
-// 		const { response } = err;
-// 		expect(response).toBeDefined();
-// 		expect(response.status).toBe(400);
+it("Gives a 400 when trying to create a todo with no title", async () => {
+	try {
+		const newTodo = {
+			user: "someone@gmail.com",
+			description: "NewDesc",
+			isComplete: false,
+			dueDate: dayjs("2100-01-01").format(),
+		};
 
-// 		// Ensure DB wasn't modified
-// 		expect(await Todo.countDocuments()).toBe(3);
-// 	}
-// });
+		await axios.post(
+			"http://localhost:3000/api/todos",
+			newTodo,
+			getHeader()
+		);
+		fail("Should have thrown an exception.");
+	} catch (err) {
+		// Ensure response is as expected
+		const { response } = err;
+		expect(response).toBeDefined();
+		expect(response.status).toBe(400);
 
-// it("updates a todo successfully", async () => {
-// 	const toUpdate = {
-// 		_id: new mongoose.mongo.ObjectId("000000000000000000000004"),
-// 		title: "UPDCompleteTitle",
-// 		description: "UPDCompleteDesc",
-// 		isComplete: false,
-// 		dueDate: dayjs("2100-01-01").format(),
-// 	};
+		// Ensure DB wasn't modified
+		expect(await Todo.countDocuments()).toBe(3);
+	}
+});
 
-// 	const response = await axios.put(
-// 		"http://localhost:3000/api/todos/000000000000000000000004",
-// 		toUpdate
-// 	);
+it("updates a todo successfully", async () => {
+	const toUpdate = {
+		_id: new mongoose.mongo.ObjectId("000000000000000000000004"),
+		user: "someone@gmail.com",
+		title: "UPDCompleteTitle",
+		description: "UPDCompleteDesc",
+		isComplete: false,
+		dueDate: dayjs("2100-01-01").format(),
+	};
 
-// 	// Check response
-// 	expect(response.status).toBe(204);
+	const response = await axios.put(
+		"http://localhost:3000/api/todos/000000000000000000000004",
+		toUpdate,
+		getHeader()
+	);
 
-// 	// Ensure DB was updated
-// 	const dbTodo = await Todo.findById("000000000000000000000004");
-// 	expect(dbTodo.title).toBe("UPDCompleteTitle");
-// 	expect(dbTodo.description).toBe("UPDCompleteDesc");
-// 	expect(dbTodo.isComplete).toBe(false);
-// 	expect(dayjs(dbTodo.dueDate)).toEqual(dayjs("2100-01-01"));
-// });
+	// Check response
+	expect(response.status).toBe(204);
 
-// it("Uses the path ID instead of the body ID when updating", async () => {
-// 	const toUpdate = {
-// 		_id: new mongoose.mongo.ObjectId("000000000000000000000003"),
-// 		title: "UPDCompleteTitle",
-// 		description: "UPDCompleteDesc",
-// 		isComplete: false,
-// 		dueDate: dayjs("2100-01-01").format(),
-// 	};
+	// Ensure DB was updated
+	const dbTodo = await Todo.findById("000000000000000000000004");
+	validateTodo(toUpdate, dbTodo);
+});
 
-// 	const response = await axios.put(
-// 		"http://localhost:3000/api/todos/000000000000000000000004",
-// 		toUpdate
-// 	);
+it("Uses the path ID instead of the body ID when updating", async () => {
+	const toUpdate = {
+		_id: new mongoose.mongo.ObjectId("000000000000000000000003"),
+		title: "UPDCompleteTitle",
+		description: "UPDCompleteDesc",
+		isComplete: false,
+		dueDate: dayjs("2100-01-01").format(),
+	};
 
-// 	// Check response
-// 	expect(response.status).toBe(204);
+	const response = await axios.put(
+		"http://localhost:3000/api/todos/000000000000000000000004",
+		toUpdate,
+		getHeader()
+	);
 
-// 	// Ensure correct DB entry was updated
-// 	let dbTodo = await Todo.findById("000000000000000000000004");
-// 	expect(dbTodo.title).toBe("UPDCompleteTitle");
-// 	expect(dbTodo.description).toBe("UPDCompleteDesc");
-// 	expect(dbTodo.isComplete).toBe(false);
-// 	expect(dayjs(dbTodo.dueDate)).toEqual(dayjs("2100-01-01"));
+	// Check response
+	expect(response.status).toBe(204);
 
-// 	// Ensure incorrect DB entry was not updated
-// 	dbTodo = await Todo.findById("000000000000000000000003");
-// 	expect(dbTodo.title).toBe("UpcomingTitle");
-// 	expect(dbTodo.description).toBe("UpcomingDesc");
-// 	expect(dbTodo.isComplete).toBe(false);
-// 	expect(dayjs(dbTodo.dueDate)).toEqual(dayjs(upcomingTodo.dueDate));
-// });
+	// Ensure correct DB entry was updated
+	let dbTodo = await Todo.findById("000000000000000000000004");
+	expect(dbTodo.title).toBe("UPDCompleteTitle");
+	expect(dbTodo.description).toBe("UPDCompleteDesc");
+	expect(dbTodo.isComplete).toBe(false);
+	expect(dayjs(dbTodo.dueDate)).toEqual(dayjs("2100-01-01"));
 
-// it("Gives a 404 when updating a nonexistant todo", async () => {
-// 	try {
-// 		const toUpdate = {
-// 			_id: new mongoose.mongo.ObjectId("000000000000000000000010"),
-// 			title: "UPDCompleteTitle",
-// 			description: "UPDCompleteDesc",
-// 			isComplete: false,
-// 			dueDate: dayjs("2100-01-01").format(),
-// 		};
+	// Ensure incorrect DB entry was not updated
+	dbTodo = await Todo.findById("000000000000000000000003");
+	expect(dbTodo.title).toBe("UpcomingTitle");
+	expect(dbTodo.description).toBe("UpcomingDesc");
+	expect(dbTodo.isComplete).toBe(false);
+	expect(dayjs(dbTodo.dueDate)).toEqual(dayjs(upcomingTodo.dueDate));
+});
 
-// 		await axios.put(
-// 			"http://localhost:3000/api/todos/000000000000000000000010",
-// 			toUpdate
-// 		);
-// 		fail("Should have returned a 404");
-// 	} catch (err) {
-// 		const { response } = err;
-// 		expect(response).toBeDefined();
-// 		expect(response.status).toBe(404);
+it("Gives a 404 when updating a nonexistant todo", async () => {
+	try {
+		const toUpdate = {
+			_id: new mongoose.mongo.ObjectId("000000000000000000000010"),
+			title: "UPDCompleteTitle",
+			description: "UPDCompleteDesc",
+			isComplete: false,
+			dueDate: dayjs("2100-01-01").format(),
+		};
 
-// 		// Make sure something wasn't added to the db
-// 		expect(await Todo.countDocuments()).toBe(3);
-// 	}
-// });
+		await axios.put(
+			"http://localhost:3000/api/todos/000000000000000000000010",
+			toUpdate,
+			getHeader()
+		);
+		fail("Should have returned a 404");
+	} catch (err) {
+		const { response } = err;
+		expect(response).toBeDefined();
+		expect(response.status).toBe(404);
 
-// it("Deletes a todo", async () => {
-// 	const response = await axios.delete(
-// 		"http://localhost:3000/api/todos/000000000000000000000003"
-// 	);
-// 	expect(response.status).toBe(204);
+		// Make sure something wasn't added to the db
+		expect(await Todo.countDocuments()).toBe(3);
+	}
+});
 
-// 	// Check db item was deleted
-// 	expect(await Todo.findById("000000000000000000000003")).toBeNull();
-// });
+it("Deletes a todo", async () => {
+	const response = await axios.delete(
+		"http://localhost:3000/api/todos/000000000000000000000003",
+		getHeader()
+	);
+	expect(response.status).toBe(204);
 
-// it("Doesn't delete anything when it shouldn't", async () => {
-// 	const response = await axios.delete(
-// 		"http://localhost:3000/api/todos/000000000000000000000010"
-// 	);
-// 	expect(response.status).toBe(204);
+	// Check db item was deleted
+	expect(await Todo.findById("000000000000000000000003")).toBeNull();
+});
 
-// 	// Make sure something wasn't deleted from the db
-// 	expect(await Todo.countDocuments()).toBe(3);
-// });
+it("Doesn't delete anything when it shouldn't", async () => {
+	const response = await axios.delete(
+		"http://localhost:3000/api/todos/000000000000000000000010",
+		getHeader()
+	);
+	expect(response.status).toBe(204);
+
+	// Make sure something wasn't deleted from the db
+	expect(await Todo.countDocuments()).toBe(3);
+});
+
+const ensureNoChangeInDB = async () => {
+	// Make sure there are the same number of todos
+	expect(await Todo.countDocuments()).toBe(3);
+
+	// Ensure no todos were modified
+	const responseTodos = await Todo.find({});
+	for (let i = 0; i < responseTodos.length; i++) {
+		const responseTodo = responseTodos[i];
+		const expectedTodo = dummyTodos[i];
+		validateTodo(expectedTodo, responseTodo);
+	}
+};
+
+it("Gives a 401 when trying to get all todos when unauthenticated", async () => {
+	try {
+		await axios.get("http://localhost:3000/api/todos/");
+		fail("Should have returned a 401");
+	} catch (err) {
+		const { response } = err;
+		expect(response).toBeDefined();
+		expect(response.status).toBe(401);
+
+		await ensureNoChangeInDB();
+	}
+});
+
+it("Gives a 401 when trying to get a single todo when unauthenticated", async () => {
+	try {
+		await axios.get(
+			"http://localhost:3000/api/todos/000000000000000000000001"
+		);
+		fail("Should have returned a 401");
+	} catch (err) {
+		const { response } = err;
+		expect(response).toBeDefined();
+		expect(response.status).toBe(401);
+
+		await ensureNoChangeInDB();
+	}
+});
+
+it("Gives a 401 when trying to create a todo when unauthenticated", async () => {
+	try {
+		const newTodo = {
+			user: "someone@gmail.com",
+			title: "NewTodo",
+			description: "NewDesc",
+			isComplete: false,
+			dueDate: dayjs("2100-01-01").format(),
+		};
+
+		const response = await axios.post(
+			"http://localhost:3000/api/todos",
+			newTodo
+		);
+		fail("Should have returned a 401");
+	} catch (err) {
+		const { response } = err;
+		expect(response).toBeDefined();
+		expect(response.status).toBe(401);
+
+		await ensureNoChangeInDB();
+	}
+});
+
+it("Gives a 401 when trying to update a todo when unauthenticated", async () => {
+	try {
+		const toUpdate = {
+			_id: new mongoose.mongo.ObjectId("000000000000000000000004"),
+			user: "someone@gmail.com",
+			title: "UPDCompleteTitle",
+			description: "UPDCompleteDesc",
+			isComplete: false,
+			dueDate: dayjs("2100-01-01").format(),
+		};
+
+		const response = await axios.put(
+			"http://localhost:3000/api/todos/000000000000000000000004",
+			toUpdate
+		);
+		fail("Should have returned a 401");
+	} catch (err) {
+		const { response } = err;
+		expect(response).toBeDefined();
+		expect(response.status).toBe(401);
+
+		await ensureNoChangeInDB();
+	}
+});
+
+it("Gives a 401 when trying to delete a todo when unauthenticated", async () => {
+	try {
+		const response = await axios.delete(
+			"http://localhost:3000/api/todos/000000000000000000000003"
+		);
+		fail("Should have returned a 401");
+	} catch (err) {
+		const { response } = err;
+		expect(response).toBeDefined();
+		expect(response.status).toBe(401);
+
+		await ensureNoChangeInDB();
+	}
+});
+
+it("Gives a 401 when trying to get todo that does not belong to the user", async () => {
+	try {
+		await axios.get(
+			"http://localhost:3000/api/todos/000000000000000000000002",
+			getHeader()
+		);
+		fail("Should have returned a 401");
+	} catch (err) {
+		const { response } = err;
+		expect(response).toBeDefined();
+		expect(response.status).toBe(401);
+	}
+});
+
+it("Gives a 401 when trying to update todo that does not belong to the user", async () => {
+	try {
+		const toUpdate = {
+			title: "Different title",
+			description: "Different Desc",
+			isComplete: false,
+			dueDate: dayjs("2100-01-01").format(),
+		};
+
+		await axios.put(
+			"http://localhost:3000/api/todos/000000000000000000000002",
+			toUpdate,
+			getHeader()
+		);
+		fail("Should have returned a 401");
+	} catch (err) {
+		const { response } = err;
+		expect(response).toBeDefined();
+		expect(response.status).toBe(401);
+
+		await ensureNoChangeInDB();
+	}
+});
+
+it("Gives a 401 when trying to delete todo that does not belong to the user", async () => {
+	try {
+		await axios.delete(
+			"http://localhost:3000/api/todos/000000000000000000000002",
+			getHeader()
+		);
+		fail("Should have returned a 401");
+	} catch (err) {
+		const { response } = err;
+		expect(response).toBeDefined();
+		expect(response.status).toBe(401);
+
+		await ensureNoChangeInDB();
+	}
+});

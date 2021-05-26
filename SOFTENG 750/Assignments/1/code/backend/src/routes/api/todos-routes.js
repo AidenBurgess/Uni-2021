@@ -5,12 +5,15 @@ import checkJwt from "./../../auth/jwt";
 
 // const HTTP_OK = 200; // Not really needed; this is the default if you don't set something else.
 const HTTP_CREATED = 201;
+const HTTP_UNAUTHORIZED = 401;
 const HTTP_NOT_FOUND = 404;
 const HTTP_NO_CONTENT = 204;
 const HTTP_BAD_REQUEST = 400;
 const HTTP_FORBIDDEN = 403;
 
 const router = express.Router();
+
+router.use(checkJwt);
 
 /**
  * A trick to include the check for a valid id in one place, rather than in every single method that needs it.
@@ -45,14 +48,7 @@ router.post("/", async (req, res) => {
 
 // Retrieve todo list
 router.get("/", async (req, res) => {
-	// Uncomment this code if you want to introduce an artificial delay.
-	// setTimeout(async () => {
-	//     res.json(await todosDao.retrieveAllTodos());
-	// }, 2000);
-
-	// Comment this code if you want to introduce an artificial delay.
 	const user = req.user.sub;
-
 	res.json(await todosDao.retrieveAllTodos(user));
 });
 
@@ -61,9 +57,13 @@ router.get("/:id", async (req, res) => {
 	const { id } = req.params;
 	const user = req.user.sub;
 
-	const todo = await todosDao.retrieveTodo(id, user);
+	const todo = await todosDao.retrieveTodo(id);
 	if (todo) {
-		res.json(todo);
+		if (todo.user !== user) {
+			res.sendStatus(HTTP_UNAUTHORIZED);
+		} else {
+			res.json(todo);
+		}
 	} else {
 		res.sendStatus(HTTP_NOT_FOUND);
 	}
@@ -77,12 +77,17 @@ router.put("/:id", async (req, res) => {
 		...req.body,
 		_id: id,
 	};
-	try {
-		const success = await todosDao.updateTodo(todo, user);
-		res.sendStatus(success ? HTTP_NO_CONTENT : HTTP_NOT_FOUND);
-	} catch (err) {
-		console.log(err);
-		res.sendStatus(HTTP_NOT_FOUND);
+	// Check if todo trying to be updated belongs to user
+	const existingTodo = await todosDao.retrieveTodo(id);
+	if (existingTodo && existingTodo.user !== user) {
+		res.sendStatus(HTTP_UNAUTHORIZED);
+	} else {
+		try {
+			const success = await todosDao.updateTodo(todo, user);
+			res.sendStatus(success ? HTTP_NO_CONTENT : HTTP_NOT_FOUND);
+		} catch (err) {
+			res.sendStatus(HTTP_NOT_FOUND);
+		}
 	}
 });
 
@@ -90,8 +95,14 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
 	const user = req.user.sub;
 	const { id } = req.params;
-	await todosDao.deleteTodo(id, user);
-	res.sendStatus(HTTP_NO_CONTENT);
+	// Check if todo trying to be deleted belongs to user
+	const existingTodo = await todosDao.retrieveTodo(id);
+	if (existingTodo && existingTodo.user !== user) {
+		res.sendStatus(HTTP_UNAUTHORIZED);
+	} else {
+		await todosDao.deleteTodo(id);
+		res.sendStatus(HTTP_NO_CONTENT);
+	}
 });
 
 export default router;

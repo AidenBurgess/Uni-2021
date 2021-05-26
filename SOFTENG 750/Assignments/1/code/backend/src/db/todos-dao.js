@@ -17,8 +17,8 @@ export async function retrieveAllTodos(user) {
 	return await Todo.find({ user });
 }
 
-export async function retrieveTodo(id, user) {
-	return await Todo.findOne({ _id: id, user: user });
+export async function retrieveTodo(id) {
+	return await Todo.findOne({ _id: id });
 }
 
 export async function updateTodo(todo, user) {
@@ -33,6 +33,6 @@ export async function updateTodo(todo, user) {
 	return result ? true : false;
 }
 
-export async function deleteTodo(id, user) {
-	await Todo.deleteOne({ _id: id, user: user });
+export async function deleteTodo(id) {
+	await Todo.deleteOne({ _id: id });
 }

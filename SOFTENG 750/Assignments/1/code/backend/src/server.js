@@ -9,9 +9,6 @@ const port = process.env.PORT || 3001;
 // Setup body-parser
 app.use(express.json());
 
-// Setup auth
-import checkJwt from "./auth/jwt";
-app.use(checkJwt);
 // Setup our routes.
 import routes from "./routes";
 app.use("/", routes);

@@ -31,33 +31,13 @@ gHdRAoGBAKfRmiGEtibHLPX/CWuaYYs0edPtlhx8+YEMy0UJRrOB40QLQdI+Q5do
 Xi1vzaXgf7j5F56b1qTXV/nMq/SY6m4g+lMJLWj+BNN9f3gtZjT6
 -----END RSA PRIVATE KEY-----`;
 
-const nockReply = {
-	keys: [
-		{
-			alg: "RS256",
-			kty: "RSA",
-			use: "sig",
-			n:
-				"x8ezF9UB_OgRSnRy-NRYbCw6r7gwsE9U4jyn85QqbJkS-t964HDcAlCJIDmunodIVGHqVGK3YV8JGSXyBHGXeicAT_OO0Yz05neCvlvvGlRNYVeKKNjkZM2McELWCXaPTFhfqkW_xitWlJSx6wSt26_fH7LBYYX-ywq9fSCXTvdIhbIbPLMfPmXvxNprNfz4VzXeNpr9oYdshsY_oELl1d13rE2TuHtTvjlgMyqPkqkigaifWd1qR5CdFpDp6FoxGa7IaDkCIQEnVplf3rnyBkfwis0lN25S1GFEZbKF3eRix7DiXj7HTBkaCUc8BSZOK118u5tc0cQdIOBzANQyBQ", //eslint-disable-line max-len
-			e: "AQAB",
-			kid: "0",
-		},
-	],
-};
-
-nock(config.auth0.issuer)
-	.persist()
-	.get("/.well-known/jwks.json")
-	.reply(200, nockReply);
-
 const getToken = () => {
 	const user = {
 		email: "someone@gmail.com",
 	};
 
 	const payload = {
-		nickname: user.email.split("@").shift(),
-		name: user.email,
+		sub: user.email,
 	};
 
 	const options = {
