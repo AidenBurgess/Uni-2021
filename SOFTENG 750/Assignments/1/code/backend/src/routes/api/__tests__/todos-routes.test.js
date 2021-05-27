@@ -8,6 +8,7 @@ import { Todo } from "../../../db/todos-schema";
 import dayjs from "dayjs";
 import { getToken } from "../fixtures";
 import checkJwt from "./../../../auth/jwt";
+import { auth0 } from "../../../../config";
 const request = require("request-promise-native");
 const nock = require("nock");
 
@@ -26,7 +27,7 @@ const nockReply = {
 	],
 };
 
-nock("https://dev-aids.au.auth0.com/")
+nock(auth0.issuer)
 	.persist()
 	.get("/.well-known/jwks.json")
 	.reply(200, nockReply);
@@ -60,6 +61,8 @@ const completeTodo = {
 };
 
 const dummyTodos = [anotherUserTodo, upcomingTodo, completeTodo];
+
+const endpoint = "http://localhost:3000/api/todos/";
 
 // Start database and server before any tests run
 beforeAll(async (done) => {
@@ -116,10 +119,7 @@ const validateTodo = (expectedTodo, actualTodo, checkId = true) => {
 };
 
 it("retrieves all todos successfully", async () => {
-	const response = await axios.get(
-		"http://localhost:3000/api/todos/",
-		getHeader()
-	);
+	const response = await axios.get(`${endpoint}`, getHeader());
 
 	expect(response.status).toBe(200);
 	const responseTodos = response.data;
@@ -136,7 +136,7 @@ it("retrieves all todos successfully", async () => {
 
 it("retrieves a single todo successfully", async () => {
 	const response = await axios.get(
-		"http://localhost:3000/api/todos/000000000000000000000003",
+		`${endpoint}/000000000000000000000003`,
 		getHeader()
 	);
 	expect(response.status).toBe(200);
@@ -147,10 +147,7 @@ it("retrieves a single todo successfully", async () => {
 
 it("returns a 404 when attempting to retrieve a nonexistant todo (valid id)", async () => {
 	try {
-		await axios.get(
-			"http://localhost:3000/api/todos/000000000000000000000001",
-			getHeader()
-		);
+		await axios.get(`${endpoint}/000000000000000000000001`, getHeader());
 		fail("Should have thrown an exception.");
 	} catch (err) {
 		const { response } = err;
@@ -161,7 +158,7 @@ it("returns a 404 when attempting to retrieve a nonexistant todo (valid id)", as
 
 it("returns a 400 when attempting to retrieve a nonexistant todo (invalid id)", async () => {
 	try {
-		await axios.get("http://localhost:3000/api/todos/blah", getHeader());
+		await axios.get(`${endpoint}/blah`, getHeader());
 		fail("Should have thrown an exception.");
 	} catch (err) {
 		const { response } = err;
@@ -237,7 +234,7 @@ it("updates a todo successfully", async () => {
 	};
 
 	const response = await axios.put(
-		"http://localhost:3000/api/todos/000000000000000000000004",
+		`${endpoint}/000000000000000000000004`,
 		toUpdate,
 		getHeader()
 	);
@@ -260,7 +257,7 @@ it("Uses the path ID instead of the body ID when updating", async () => {
 	};
 
 	const response = await axios.put(
-		"http://localhost:3000/api/todos/000000000000000000000004",
+		`${endpoint}/000000000000000000000004`,
 		toUpdate,
 		getHeader()
 	);
@@ -294,7 +291,7 @@ it("Gives a 404 when updating a nonexistant todo", async () => {
 		};
 
 		await axios.put(
-			"http://localhost:3000/api/todos/000000000000000000000010",
+			`${endpoint}/000000000000000000000010`,
 			toUpdate,
 			getHeader()
 		);
@@ -311,7 +308,7 @@ it("Gives a 404 when updating a nonexistant todo", async () => {
 
 it("Deletes a todo", async () => {
 	const response = await axios.delete(
-		"http://localhost:3000/api/todos/000000000000000000000003",
+		`${endpoint}/000000000000000000000003`,
 		getHeader()
 	);
 	expect(response.status).toBe(204);
@@ -322,7 +319,7 @@ it("Deletes a todo", async () => {
 
 it("Doesn't delete anything when it shouldn't", async () => {
 	const response = await axios.delete(
-		"http://localhost:3000/api/todos/000000000000000000000010",
+		`${endpoint}/000000000000000000000010`,
 		getHeader()
 	);
 	expect(response.status).toBe(204);
@@ -346,7 +343,7 @@ const ensureNoChangeInDB = async () => {
 
 it("Gives a 401 when trying to get all todos when unauthenticated", async () => {
 	try {
-		await axios.get("http://localhost:3000/api/todos/");
+		await axios.get(`${endpoint}`);
 		fail("Should have returned a 401");
 	} catch (err) {
 		const { response } = err;
@@ -359,9 +356,7 @@ it("Gives a 401 when trying to get all todos when unauthenticated", async () => 
 
 it("Gives a 401 when trying to get a single todo when unauthenticated", async () => {
 	try {
-		await axios.get(
-			"http://localhost:3000/api/todos/000000000000000000000001"
-		);
+		await axios.get(`${endpoint}000000000000000000000001`);
 		fail("Should have returned a 401");
 	} catch (err) {
 		const { response } = err;
@@ -408,7 +403,7 @@ it("Gives a 401 when trying to update a todo when unauthenticated", async () => 
 		};
 
 		const response = await axios.put(
-			"http://localhost:3000/api/todos/000000000000000000000004",
+			`${endpoint}000000000000000000000004`,
 			toUpdate
 		);
 		fail("Should have returned a 401");
@@ -424,7 +419,7 @@ it("Gives a 401 when trying to update a todo when unauthenticated", async () => 
 it("Gives a 401 when trying to delete a todo when unauthenticated", async () => {
 	try {
 		const response = await axios.delete(
-			"http://localhost:3000/api/todos/000000000000000000000003"
+			`${endpoint}000000000000000000000003`
 		);
 		fail("Should have returned a 401");
 	} catch (err) {
@@ -438,10 +433,7 @@ it("Gives a 401 when trying to delete a todo when unauthenticated", async () => 
 
 it("Gives a 401 when trying to get todo that does not belong to the user", async () => {
 	try {
-		await axios.get(
-			"http://localhost:3000/api/todos/000000000000000000000002",
-			getHeader()
-		);
+		await axios.get(`${endpoint}000000000000000000000002`, getHeader());
 		fail("Should have returned a 401");
 	} catch (err) {
 		const { response } = err;
@@ -460,7 +452,7 @@ it("Gives a 401 when trying to update todo that does not belong to the user", as
 		};
 
 		await axios.put(
-			"http://localhost:3000/api/todos/000000000000000000000002",
+			`${endpoint}000000000000000000000002`,
 			toUpdate,
 			getHeader()
 		);
@@ -476,10 +468,7 @@ it("Gives a 401 when trying to update todo that does not belong to the user", as
 
 it("Gives a 401 when trying to delete todo that does not belong to the user", async () => {
 	try {
-		await axios.delete(
-			"http://localhost:3000/api/todos/000000000000000000000002",
-			getHeader()
-		);
+		await axios.delete(`${endpoint}000000000000000000000002`, getHeader());
 		fail("Should have returned a 401");
 	} catch (err) {
 		const { response } = err;
