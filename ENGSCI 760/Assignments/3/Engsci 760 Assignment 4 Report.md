@@ -8,7 +8,7 @@
 
 Stages: Amount of change left
 
-States: Coins that are being used 
+States: Number of coins used
 
 Actions: Add a coin of a remaining denomination
 
@@ -20,14 +20,29 @@ Costs:
 
 ### b.
 
-[dynamic_programming_handout.pdf (ryan-moreno.github.io)](https://ryan-moreno.github.io/resources/dynamic_programming_handout.pdf)
+$$
+\begin{equation*}
+V_N(x) = \begin{cases}
+1 & \text{if } x=D_N \\
+\min_{d\in D}(V_{n-1}(x-d)) & \text{if possible to make change with coin} \\
+\infty & \text{otherwise}
+\end{cases}
+\end{equation*}
+$$
 
-![image-20210602114112574](C:\Users\aiden\AppData\Roaming\Typora\typora-user-images\image-20210602114112574.png)
-$$
-V_N(x) =
-$$
+if $\frac{x}{D_N}$ is not an integer, then this means that our change cannot be split evenly into a certain denomination. This means that we have to use other coins to make up the change, or it may not be possible to use this coin, in which case we have an infinite cost.
 
 ### c.
+
+$$
+V_n(x) = 1 + \min_{d\in D}(V_{n-1}(x-d))
+$$
+
+$$
+V_N(0) = 0
+$$
+
+
 
 ### d.
 
@@ -42,10 +57,10 @@ Overlapping subproblems: Solutions to subproblems are reused repeatedly, as comb
 #### i.
 
 $$
-V(x) = \min{V(x+d)}
+V(0) = \min_{d \in D}({V(d+1)})
 $$
 
-
+We stop the recursion when the target value $x$ has been reached
 
 #### ii.
 
@@ -89,17 +104,17 @@ def optimalCoinChange(x, denoms):
 
 ### a)
 
-Stages
+Stages: Number of exams completed
 
-States
+States: Amount of beers available to drink
 
-Actions
+Actions: Drink 0, 1, or 2 beers
 
 
 
 ### b)
 
-The value function for this problem represents the amount of satisfaction that the student can gain from drinking x beers after exam n.
+The value function for this problem represents the amount of satisfaction that the student can gain from having x available beers after exam n.
 
 ### c)
 
@@ -107,9 +122,9 @@ $$
 V_n(x) = \max(V_{n+1}(x), V_{n+1}(x-1), V_{n+1}(x-2))
 $$
 
-$$
-if x
-$$
+Note for the above recursion we do not let x go below 0. 
+
+This recursion ends when x = 0
 
 
 
@@ -166,6 +181,8 @@ $$
 V_{N-1} = \frac{20}{27} + \frac{5}{9} = \frac{35}{27}
 $$
 
+Hence, the equation is proven.
+
 ### d)
 
 We extend the specific behaviour from $V_{N-1}$ to be more general for all $n$
@@ -196,3 +213,5 @@ $$
 $$
 V_n = 1 + \frac{V_{n+1}^2}{3} - \frac{V_{n+1}^3}{27}
 $$
+
+Hence the equation is proven.
