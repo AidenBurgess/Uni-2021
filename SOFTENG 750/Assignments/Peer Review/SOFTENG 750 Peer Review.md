@@ -10,15 +10,7 @@ I am very happy with all my teammates, I feel like we had fair and constant dead
 
 ## Project Group Peer Review
 
-Attended their presentations
-
-Looked at their repositories
-
-Ran their code and played around with their system (or at least tried to)
-
-Put some thought into what they have done well and what they could improve.
-
-### Group 17
+### Group 17 - Red Rhinocerous
 
 The presentation overall was excellent, and it was professional. To improve the introduction, there could have been discussion about motivations. The design section of the presentation also could have been improved by talking about how design was thought about, references, and process. I was very interested in the presentation and impressed by how the application looked and the development process.
 
@@ -32,4 +24,16 @@ Another anomaly from the GitHub contributions is Henry (syan386), who has 6 comm
 
 <img src="C:\Users\aiden\AppData\Roaming\Typora\typora-user-images\image-20210605225026338.png" alt="image-20210605225026338" style="zoom:40%;" />
 
-### Group 34
+### Group 34 - Purple Penguin
+
+The introduction introduced the motivations for the project, a gap in the current environment, and the objective for their project. The styling for the presentation is significantly more customised compared with the submission, which was explained in the presentation. The first speaker Ken did not seem very prepared, as there was a bit of stumbling. Other than this, the presentation went smoothly and professionally.
+
+The technical difficulty of the project seems quite high, so this was a very optimistic project. The most challenging and interesting part of the project I think is running the user submitted code in an isolated container. Although I feel like there could be some serious vulnerability issues with running user code, so the team could do some more investigation and testing on the isolated container to ensure safety. The frontend functionality of real-time streaming of code, invites, and who is present on a page is also impressive.
+
+Unfortunately, there are no tests for the project, which could be an issue long-term, but this was included as a priority for future work. 
+
+I found it difficult to setup the backend server, as there were not enough instructions to fill out the .env file. As expected the frontend looked significantly different from the presentation, and there were other parts of the application missing.
+
+StartestBright had a similar issue to Henry in the previous group, however this was explained in the presentation: they had some trouble with VCS so were transferring some code via USB. Overall the contributions seem to be satisfactory, as commit numbers can vary by people depending on their style.
+
+<img src="C:\Users\aiden\AppData\Roaming\Typora\typora-user-images\image-20210606155441501.png" alt="image-20210606155441501" style="zoom:50%;" />
