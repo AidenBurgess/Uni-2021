@@ -29,25 +29,78 @@ component, formatting, style, styling, insert
 
 
 \subsection{Motivation}
+Students need to remove all distractions to study effectively. However, the process of setting up a relaxing environment for a session of focused work can be tedious and repetitive. Many students prefer to study with music in the background and with a nice wallpaper. When working on large problems or many problems, they like to break them down into smaller tasks in a todo list. It has become increasingly popular to use time-boxed techniques to maximise efficiency and focus, such as Pomodoro. Therefore, students may need to juggle many apps simultaneously, which can be distracting and annoying.
 
+A unique feature that the team thought would be worthwhile to introduce is the ability to change the background and music based on the user's current mood.
 
 \subsection{Goals}
+The goals for this project were separated by priority into must-haves, should-haves, could-haves, and nice-to-haves. The list of proposed goals for the project can be found in Table 1.
+
+As a summary, the main goals for the project was the mood-based functionality, which interacted with the background and music, and the todo list. These were chosen as the main goals because the unique feature of a mood.... The todo list is one of the most important components needed when a student is studying as it allows them to track their goals and progress for the study session.
+
+With the same reasoning, white noise and a timer were should have functionality, as they aid a user's study.
+
+\begin{table}[htbp]
+\caption{Project Goals.}\label{tab1}
+\resizebox{\columnwidth}{!}{\begin{tabular}{|p{18mm}|p{13mm}|p{45mm}|}
+\cline{1-3} 
+\textbf{\textit{Feature}}& \textbf{\textit{Time Estimate (Hours)}}& \textbf{\textit{Feature Description and Estimate Justification}} \\
+\hline
+\multicolumn{3}{|c|}{\textbf{Must-Haves}} \\
+\hline
+Mood based music player and recommendations & 20 & Get moods/preference from a mood slider and generate a playlist using the Spotify API that can be played in the browser. \\
+\hline
+Mood backgrounds & 12 & Generate some backgrounds based on the mood sliders/settings. Uses the splash API to retrieve backgrounds based on the search term. Create a slideshow with customisable interval. \\
+\hline
+Todo list & 10 & The ability to add items to a todo list which can help the user keep track of their progress.
+Does not use third-party tools. \\
+\hline
+\multicolumn{3}{|c|}{\textbf{Should-Haves}} \\
+\hline
+White noise & 8 & A feature that will generate white noise for the user to aid in their study.
+Simple white noise audio file that can play/pause. Reuse styling from the music recommender above. \\
+\hline
+Timer & 6 & A timer that can countdown and allow the user to keep track of time and perhaps implement study strategies like Pomodoro. \\
+\hline
+\multicolumn{3}{|c|}{\textbf{Could-Haves}} \\
+\hline
+Whiteboard & 8 & A whiteboard that the user can use to draw and save some of the images to help with their study. 
+Use Third party components. \\
+\hline
+Study statistics & 15 & Statistics that summarise the user’s music time, study time, items added and completed. This can be used to help the student with seeing how much progress they are making. \\
+\hline
+User accounts & 20 & User accounts which remember the user’s preferences, with login details, and the ability to access preferences from multiple accounts.
+Using a database over local storage. \\
+\hline
+\multicolumn{3}{|c|}{\textbf{Nice-To-Haves}} \\
+\hline 
+Music recommendations based on weather & 10 & Get the user location, and weather, then give a music recommendation using the Music Player already implemented. \\
+\hline
+Inspirational messages & 5 & Generating inspirational messages using API to display. \\
+\hline
+\end{tabular}}
+\end{table}
 
 
 \section{Related Work}
-
+What has been done before? Compare it with your project.
 
 \section{Design}
+Software architecture (e.g. class diagram)? User interface (e.g. screen diagram)? Why this design?
 
 \section{Implementation}
+What have we implemented?
 
 \section{Testing}
+How have we tested?
 
 \section{Methodology}
 
 \section{Discussion}
+Have the goals been achieved? Problems?
 
 \section{Conclusion}
+Conclusions? Lessons? Future work?
 
 
 \textbf{The class file is designed for, but not limited to, six authors.} A 
@@ -85,28 +138,12 @@ below the figures; table heads should appear above the tables. Insert
 figures and tables after they are cited in the text. Use the abbreviation 
 ``Fig.~\ref{fig}'', even at the beginning of a sentence.
 
-\begin{table}[htbp]
-\caption{Table Type Styles}
-\begin{center}
-\begin{tabular}{|c|c|c|c|}
-\hline
-\textbf{Table}&\multicolumn{3}{|c|}{\textbf{Table Column Head}} \\
-\cline{2-4} 
-\textbf{Head} & \textbf{\textit{Table column subhead}}& \textbf{\textit{Subhead}}& \textbf{\textit{Subhead}} \\
-\hline
-copy& More table copy$^{\mathrm{a}}$& &  \\
-\hline
-\multicolumn{4}{l}{$^{\mathrm{a}}$Sample of a Table footnote.}
-\end{tabular}
-\label{tab1}
-\end{center}
-\end{table}
-
 \begin{figure}[htbp]
 \centerline{\includegraphics{fig1.png}}
 \caption{Example of a figure caption.}
 \label{fig}
 \end{figure}
+
 
 Figure Labels: Use 8 point Times New Roman for Figure labels. Use words 
 rather than symbols or abbreviations when writing Figure axis labels to 
