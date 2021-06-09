@@ -7,6 +7,10 @@
 \usepackage{graphicx}
 \usepackage{textcomp}
 \usepackage{xcolor}
+\usepackage{xparse}
+\NewDocumentCommand{\codeword}{v}{%
+\texttt{\textcolor{blue}{#1}}%
+}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
@@ -132,24 +136,39 @@ The database role and schema is relatively simple. It stores the mood and todo l
 %What have we implemented? 
 %Technologies?
 %How was the work split up
+%Split into team contribution and individual?
 
 Note: In this section I will talk solely about my individual contributions to the project.
 
-From the project roadmap, we can see there are seven main epics for the project. I worked on the mood slider and timer components.
+From the project roadmap (Fig \ref{roadmap}.), we can see there are seven main epics for the project. I worked on the mood slider and timer components. The mood slider also required integration with the spotify and background components. I also developed the login page of the application and styling for my components.
 
 \begin{figure}[htbp]
 \centerline{\includegraphics[width = \linewidth]{project-roadmap.png}}
 \caption{Project roadmap.}
-\label{fig}
+\label{roadmap}
 \end{figure}
 
-%Split into team contribution and individual?
-%Add some screenshots. Homepage (which I did)
+\subsection{Timer}
+The simplest and first component that I implemented is the timer component (top left Fig \ref{homepage}.). It does not require any backend or database interaction, as it is a purely frontend component. I started by using an existing component I found online for the timer component. Then, I added a validated user input to specify the time requested, and the buttons for starting and stopping the timer.
+
+\subsection{Mood Slider}
+Next was the mood slider (bottom left Fig \ref{homepage}.). The frontend of the mood component was again started from an existing component I found online. This required a database to store the moods per user, so I created a MongoDB Cloud database for the project. The schema for the mood was a nested mood object consisting of five fields inside a larger user object. The backend code was located in the route \codeword{api/mood}. I also implemented the backend testing for the overall user route, which contained the functionality for moods and todo lists.
+
+Finally, the mood needed to be integrated with the background and music components. The mood was stored in the application globally and the \codeword{useEffect()} function was used to react to changes in this state. When the mood changes, the background and spotify components both update. The background component has more complex functionality as there is no direct way to map the mood to a background. Therefore, a \codeword{moodToSearchParser} was developed acting as a translator. For example, if valence is high then the term "happy" is added to the search terms used to find backgrounds.
 
 \begin{figure}[htbp]
-\centerline{\includegraphics[width = \linewidth]{homescreen.png}}
+\centerline{\includegraphics[width = \linewidth]{homepage.png}}
 \caption{Application homepage.}
-\label{fig}
+\label{homepage}
+\end{figure}
+
+\subsection{Sign-in Page}
+Near the end of the project, I was assigned with styling the homepage, as it was empty with two buttons. From some quick research I found that the login and sign buttons were often offset on a homepage, so I designed the homepage following this pattern (Fig \ref{signin}.). Originally I used a static image, but I found that a GIF with a starfield animation was more engaging. The GIF used is a well known meme around studying called the lofi girl.
+
+\begin{figure}[htbp]
+\centerline{\includegraphics[width = \linewidth]{signin.png}}
+\caption{Application sign in page.}
+\label{signin}
 \end{figure}
 
 \section{Testing}
@@ -225,6 +244,7 @@ Along with these goals that were specified at the beginning of the project, othe
 
 
 \subsection{Challenges}
+% This part needs to be rewritten
 One of the challenges we faced was that Sam was in Australia for the first 7 weeks of the project, so we had to hold our meetings online via Discord and Zoom
 
 Another challenge was working with the spotify player api, as many teams have discussed previously, there are some frustrating parts of the spotify api, such as needing spotify premium to play music through spotify player api, and authentication protocols were proprietary and difficult to learn
