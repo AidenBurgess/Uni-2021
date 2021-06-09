@@ -172,51 +172,40 @@ Near the end of the project, I was assigned with styling the homepage, as it was
 \end{figure}
 
 \section{Testing}
-%How have we tested?
-%Frontend testing
+Our application has tests for both the frontend and backend systems.
 
-%Backend testing
+Shallow and snapshot testing was performed on the frontend. Shallow testing is rendering a single component and asserting its behaviour. It allows us to check that the component is loaded correctly while ignoring the implementation of the children elements. "A [sic] snapshot test renders a UI component, takes a snapshot, then compares it to a reference snapshot file stored alongside the test.\cite{b1}" It ensures that no unexpected changes occur between versions.
 
+Backend testing was performed via Jest and mocks. As our project relies heavily on external APIs, we had to mock these services when writing unit tests for the application. This decouples the correctness of our application from the correctness of the APIs we use. We used an in-memory mongodb server to reduce coupling between the backend and database, and to improve test speed.
 
 \section{Methodology}
-%Management of your team in the project.
+Our team followed an Agile process, with one team leader (Sam), and two team meetings per week. We also utilised many technologies such as Jira, GitHub, and Discord to manage our project.
 
 \subsection{Technologies}
-%Many technologies were used to co-ordinate and manage the team.
+\subsubsection{Jira}
+Jira is a product by Atlassian to manage a project's tickets and progress (Fig \ref{progress}.). We utilised it heavily to track what tasks team members were assigned, and to manage our weekly sprints. Jira has a built-in sprint board, and backlog which synergized with our Agile approach.
+
 \subsubsection{Github}
-%Can add a screenshot of branches
-%Github is a VCS
+We utilised GitHub as our version control system of choice. A new branch was created on GitHub for each ticket on Jira. The naming convention of the branches included the ticket id and the feature, for example \codeword{AnubhavKhanna07/SAT-84/timer-colour-dark-mode}. This allowed tickets to be tracked more easily. After the feature was implemented, a pull request was made against the main branch and at least one other member commented or approved the request (Fig \ref{github}.). GitHub Actions was also utilised to automatically run the frontend and backend tests on each pull request. 
 
 \begin{figure}[htbp]
 \centerline{\includegraphics[width = \linewidth]{github-network.png}}
 \caption{GitHub network map.}
-\label{fig}
+\label{github}
 \end{figure}
 
-\subsubsection{Jira}
-%Can add a screenshot of stats
-Jira is a 
 \subsubsection{Discord}
-Discord is a 
+Discord is a messaging application with built in voice channels, video streaming, and screen-sharing. We used it in this project for most of our communication, and for video calls. I also integrated it with GitHub so that each action on the repository such as test results and pull requests was shown in Discord.
 
-%Added integration with github bot (could add a screenie)
-
-\begin{figure}[htbp]
-\centerline{\includegraphics[width = \linewidth]{discord.png}}
-\caption{Example Messenger messages.}
-\label{fig}
-\end{figure}
 \subsubsection{Messenger}
-Messenger is a 
+Messenger is Facebook's messaging platform, which focuses on more real-time interaction. As each team member used Facebook, we would be notified immediately about new messages, so this was used for more timely discussions and reminders (Fig \ref{messenger}.). There is only a single channel, which makes it difficult to manage multiple conversations and topics, so Discord was used in conjunction with Messenger.
 
 \begin{figure}[htbp]
 \centerline{\includegraphics[width = \linewidth]{messenger.png}}
 \caption{Example Messenger messages.}
-\label{fig}
+\label{messenger}
 \end{figure}
 
-\subsubsection{Zoom}
-Zoom is a 
 \subsection{Agile}
 %Can add a screenshot of burndown
 The Agile methodology is...
@@ -229,7 +218,7 @@ One-week sprints, Jira helped track these. Sprints started on Monday, held a mid
 \begin{figure}[htbp]
 \centerline{\includegraphics[width = \linewidth]{cumulative-flow-diagram.png}}
 \caption{Cumulative progress chart.}
-\label{fig}
+\label{progress}
 \end{figure}
 
 
@@ -262,8 +251,7 @@ Another challenge was working with the spotify player api, as many teams have di
 %citation first, followed by the original foreign-language citation \cite{b6}.
 
 \begin{thebibliography}{00}
-\bibitem{b1} G. Eason, B. Noble, and I. N. Sneddon, ``On certain integrals of Lipschitz-Hankel type involving products of Bessel functions,'' Phil. Trans. Roy. Soc. London, vol. A247, pp. 529--551, April 1955.
-\bibitem{b2} J. Clerk Maxwell, A Treatise on Electricity and Magnetism, 3rd ed., vol. 2. Oxford: Clarendon, 1892, pp.68--73.
+\bibitem{b1}Jestjs.io. 2021. Snapshot Testing · Jest. [online] Available at: <https://jestjs.io/docs/snapshot-testing> [Accessed 9 June 2021].
 \end{thebibliography}
 
 
