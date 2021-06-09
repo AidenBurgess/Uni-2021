@@ -1,5 +1,4 @@
 \documentclass[conference]{IEEEtran}
-\IEEEoverridecommandlockouts
 % The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
 \usepackage{cite}
 \usepackage{amsmath,amssymb,amsfonts}
@@ -95,8 +94,6 @@ Todoist is a comprehensive app that allows the user to create todo lists. It has
 
 
 \section{Design}
-%Software architecture (e.g. class diagram)? User interface (e.g. screen diagram)? Why this design?
-
 \subsection{Visual Design}
 The visual design process began with an ideation phase, where each team member came up with some ideas for the overall design of the app. Some ideas were to have the components as widgets floating on the screen, hacing a grid with the components fixed in place, having the components in tabs, and having a main menu to reach the components. 
 
@@ -133,11 +130,6 @@ The database role and schema is relatively simple. It stores the mood and todo l
 %How was state managed?
 
 \section{Implementation}
-%What have we implemented? 
-%Technologies?
-%How was the work split up
-%Split into team contribution and individual?
-
 Note: In this section I will talk solely about my individual contributions to the project.
 
 From the project roadmap (Fig \ref{roadmap}.), we can see there are seven main epics for the project. I worked on the mood slider and timer components. The mood slider also required integration with the spotify and background components. I also developed the login page of the application and styling for my components.
@@ -179,7 +171,7 @@ Shallow and snapshot testing was performed on the frontend. Shallow testing is r
 Backend testing was performed via Jest and mocks. As our project relies heavily on external APIs, we had to mock these services when writing unit tests for the application. This decouples the correctness of our application from the correctness of the APIs we use. We used an in-memory mongodb server to reduce coupling between the backend and database, and to improve test speed.
 
 \section{Methodology}
-Our team followed an Agile process, with one team leader (Sam), and two team meetings per week. We also utilised many technologies such as Jira, GitHub, and Discord to manage our project.
+Our team followed an Agile process, with one team leader, and two team meetings per week. We also utilised many technologies such as Jira, GitHub, and Discord to manage our project.
 
 \subsection{Technologies}
 \subsubsection{Jira}
@@ -207,7 +199,6 @@ Messenger is Facebook's messaging platform, which focuses on more real-time inte
 \end{figure}
 
 \subsection{Agile}
-%Can add a screenshot of burndown
 The Agile methodology is a software development process which focuses on iterative development and fast iterations \cite{b2}. Out team held one-week long sprints, and Jira helped track these. The sprints started on Monday, and we held a mid-sprint review on Thursdays to check if anyone had any significant blockers or interesting things to report.
 
 On Monday, we reviewed the sprint, and work was assigned to each team member. During this session we discussed what had been completed and what we could do in the next week. 
@@ -222,28 +213,28 @@ From the progress chart \ref{progress}, we can see that there is constant progre
 
 \section{Discussion}
 \subsection{Progress on Goals}
-Our team implemented all of the must-haves, two of the should-haves, and one of the could-haves. 
+Our team implemented all of the must-haves, one of the should-haves, and one of the could-haves. The should-have that was implemented was the timer. The could-have that was implemented was the user accounts feature.
 
-Along with these goals that were specified at the beginning of the project, other smaller features were also added to the system. A homepage was added which was not originally in the design
+Along with these goals that were specified at the beginning of the project, other smaller features were also added to the system. A homepage was added which was not originally in the design, and we were not originally planning on having a database or backend, but these were added as the user accounts feature was added.
 
 
 \subsection{Challenges}
-% This part needs to be rewritten
-One of the challenges we faced was that Sam was in Australia for the first 7 weeks of the project, so we had to hold our meetings online via Discord and Zoom
+One of the challenges we faced was that the team leader Samuel was in Australia for the first seven weeks of the project, so we had to hold our meetings online via Discord and Zoom for most of the project.
 
-Another challenge was working with the spotify player api, as many teams have discussed previously, there are some frustrating parts of the spotify api, such as needing spotify premium to play music through spotify player api, and authentication protocols were proprietary and difficult to learn
+Another challenge was working with the Spotify player API, we found that there are frustrating parts of the Spotify API, such as needing Spotify premium to play music through Spotify player api, and the authentication protocols were proprietary and difficult to learn.
 
+I also was challenged personally when implementing backend tests, as I had not dealt with mocking before.
 
 \section{Conclusion}
 %Conclusions? Lessons? Future work?
+Overall, the project was successful and we met most of our planned goals, and even added more features as the project progressed. However, there are still many features that we plan to implement in the future. White noise is a common study aid tool which I believe is a key benefit to our application. Another useful feature would be the whiteboard, as a todo list can only record text, some thoughts and notes are not recordable currently.
 
+The biggest learnings through this project for me were working effectively in a team remotely, the power of project management through Jira, and backend testing using Jest.
 
 \section*{Acknowledgment}
+I would like to thank my team members, Samuel Chen, Anubhav Khanna, and Charles Paterson for their excellent work throughout the project.
 
-\section*{References}
-
-%For papers published in translation journals, please give the English 
-%citation first, followed by the original foreign-language citation \cite{b6}.
+I'd also like to thank the lecturer overseeing this course Dr Andrew Meads for providing useful lectures and tutorials introducing me to new concepts.
 
 \begin{thebibliography}{00}
 \bibitem{b1}"Snapshot Testing · Jest", Jestjs.io, 2021. [Online]. Available: https://jestjs.io/docs/snapshot-testing. [Accessed: 09- Jun- 2021].
