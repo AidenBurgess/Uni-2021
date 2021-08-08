@@ -1,55 +1,25 @@
 # Agile Discovery - Aiden Burgess
 
-Pros and cons of scrum, kanban, XP in a uni environment
+## SOFTENG 306 Refactoring Project
 
-## Agile manifesto
+For the second half of SOFTENG 306, I lead a team of seven in a refactoring project. This was my first experience leading a software project of such a large team. In my personal work, I prefer having a backlog of items, which can be pulled from as tasks I am currently working on are completed. This follows a Kanban-style of work, so I suggested that our team use Trello to track the backlog and tasks. Tasks were not assigned (assuming self-assignment), and there weren't clear deadlines for assignments. 
 
-> - **Individuals and interactions** over **processes and tools**
-> - **Working software** over **comprehensive documentation**
-> - **Customer collaboration** over **contract negotiation**
-> - **Responding to change** over **following a plan**
+After a few weeks, we found that the team completed less work than expected, so we were behind in progress, and there was an unequal workload amongst team members. Some people tend to procrastinate, so this style of Agile did not work well for them. Also, there was not much accountability as we held meetings infrequently, so people didn't realise that others were getting work done. As the project deadlines approached, I recognised these issues, added clear deadlines, and assigned specific tasks. After these changes, the team worked extremely hard over several days to complete all the tasks.
 
-## XP Practices
+Daily standups, a practice of both Scrum and Kanban, were not feasible in this project and generally in a university environment. Students have different schedules and are not working full time on the project assigned to the team. This makes it impossible for all team members to meet daily with substantial updates. Instead, this practice can be adapted to be held a few times a week to allow for semi-regular updates. These semi-regular standups would help motivate the team and inform everyone of the project progression.
 
-> - The Planning Game
-> - Small Releases
-> - Metaphor
-> - Simple Design
-> - **Testing**
-> - Refactoring
-> - **Pair Programming**
-> - **Collective Ownership**
-> - **Continuous Integration**
-> - **On-site Customer**
-> - Coding Standard
+Through this experience, I learned the Scrum value of adaptability and the Agile value of responding to change. If we had followed the sprint retrospective, the problems would have been discovered sooner, and there wouldn't have been an unsustainable workload near the end of the project. I think sprint retrospectives are critical early in a project to set good practices and reflect on productivity. I also should have fostered an environment to support my teammates and helped motivate them instead of taking such a hands-off approach. Instead of interacting directly with my teammates, I trusted the processes and tools too much. At the end of the project, the development was not sustainable, so it did not follow Agile principles.
 
-Relate my experiences with Agile and Scrum. My takeaways from agile and scrum. Talk a little bit about Kanban and how it is incorporated. Have a look at XP
-
-## Gentrack Internship
-
-Gentrack was my first experience with an Agile environment. Although it was a bit limited as I was in a team of three interns who were working on a separate project. We created our own tasks as we discovered them and used a Kanban style of working, with assigned tasks and a deadline set for a set of tasks set by our manager.
-
-## SOFTENG 306 Project II (Refactoring)
-
-For the course SOFTENG 306, I lead a team of seven in a refactoring project. This was my first experience leading a software project of such a large team. In my personal work I prefer having a backlog of items, which can be pulled from as tasks I am currently working on are completed. This clearly resembles a Kanban style of work, and our team used Trello to track the backlog and tasks. Initially, tasks were not assigned (self-assignment) and there weren't clear deadlines for tasks either. 
-
-After a few weeks, we found that the team completed less work than expected, so were behind in terms of progress, and there was an unequal workload amongst team members. Some people like to procrastinate so this style of Agile did not work well for our team. Also there was not much accountability as we held meetings infrequently (no daily stand-ups), so people didn't realise that others were getting work done. 
-
-Daily standups, which are a part of both Scrum and Kanban, are not feasible in a university environment. Student's have different schedules, and are not working full time on the project assigned to the team. Instead, this practice can be adapted to be held a few times a week, to allow for semi-regular updates.
-
-As the project deadlines approached I recognised these issues and changed added clear deadlines and assigned people with specific tasks. We grinded and got the work done, although there were some team conflicts.
-
-^ Learned adaptability (scrum) and responding to change. If we had followed the sprint retrospective maybe this change would have been implemented sooner. I think that sprint retrospectives are much more important earlier in a project to set good practices and reflect early on productivity. I should have fostered an environment to support my teammates and helped motivate them instead of taking such a hands-off approach. The development at the end of the project was not sustainable, so did not follow Agile principles. Instead of interacting directly with my teammates, I trusted the processes and tools too much. 
-
-There was a big PR that we discovered was going to be too difficult to complete in time for the project deadline, so I responded to this change by shifting our focus onto smaller and easier refactors, rather than trying to stick to our original plan. In reflecting, it would have been more effective to follow the XP principle of incremental changes and to have split this large PR smaller, more manageable PRs. 
+I had to make a difficult decision during this project. We discovered a big PR would be too complex to complete in time for the project deadline, so I responded to this change by shifting our focus onto smaller and easier refactors rather than sticking to our original plan. In our team's retrospective, we all agreed that this was the correct move, reinforcing the Agile value of preferring responsiveness over a plan. An improvement to this situation would have been following the XP principle of incremental changes; and splitting this significant PR into smaller, more manageable PRs. This way, the progress of the PR would have been integrated into the codebase instead of discarding the entire PR.
 
 ## Amazon Internship
 
-Amazon internship experience in an Agile team. Initially following pretty strict scrum. Daily standups combined with ops talk was 1h+ each day. We had a retrospective, where we identified major issues. Estimates were not working out. The amount of time spent in meetings was too excessive. We debated between Kanban and a Kanban + scrum mix.
+Over the last summer break, I worked at Amazon in an Agile team. Initially, my team was following a strict version of Scrum. There were daily standups combined with operations discussion which amounted to over one hour each day. Our team identified significant issues in a retrospective. Estimates were not accurate, and we couldn't perceive a way to make them more real. The amount of time spent in meetings was too excessive. Therefore, we decided a change was needed and considered Scrum, Kanban, and a mix of Kanban and Scum. Finally, we decided to use a mix of Kanban and Scrum, reducing time in meetings, and keeping the overall goals clear through a Kanban board. There would still be sprints, but there would be a continuous flow of tasks from the backlog to the work in progress.
 
-Amazon experience also integrated many XP practices, such as pair programming/debugging with my mentor, testing and continuous integration, collective ownership, and an "on-site customer". Almost every line of code I wrote had to be tested, there were unit tests, integration tests, end to end tests, "canaries", alarms, and monitors. The team also actively practiced collective ownership. As all the code had to be reviewed before being merged, no one person was responsible for any issues, the entire team took responsibility. We also received most of our tasks and issues directly from customers (customer collaboration), they would send tickets with issues or potential features, and we would respond to each person individually and in a timely fashion. These customer tickets as well as some operational and team suggested tickets made up our product backlog (which was huge lol).
+I also experienced many XP practices, such as pair programming/debugging with my mentor, testing and continuous integration, collective ownership, and an "on-site customer". Almost every line of code I wrote had to be tested, with many types of tests. The team also actively practised collective ownership. As all the code had to be reviewed before being merged, no one person was responsible for any issues; the entire team took responsibility. We also received most of our tasks and issues directly from customers. They would send tickets with problems or potential features, and we would respond to each person individually and in a timely fashion. These customer tickets made up most of our product backlog.
 
-There was an internal anonymous survey to measure how the team was feeling about our work and projects. My manager noticed that satisfaction had been decreasing slightly over a month or so, and scheduled a meeting for the team to air any concerns. Here everyone spoke openly about issues such as excessive amounts of time in meetings, stress, and operational issues.
+There was an anonymous internal survey to measure how the team was feeling about our work and projects. My manager noticed that satisfaction had been decreasing slightly over a month and scheduled a meeting for the team to air any concerns. Here, everyone spoke openly about excessive amounts of time in meetings, stress, and operational issues.
 
-Collective code ownership (XP) in industry allows each team member to make changes to any part of a code base. This may not work as well in a university context, as there are strong time constraints. Under these constraints the time needed to switch to a different module - reading documentation and understanding code - may be inefficient. I prefer the system of weak code ownership where modules are assigned to owners, but team members can modify other modules if they feel the need to do so. This means that there is always at least one person who has deep knowledge of some part of the codebase. (Can put experience here in softeng 306 part 1 where I switched from backend to frontend)
+In a University context, it is essential to adjust the team's behaviour as the project progresses. To achieve the team needs to actively value openness and courage to bring light to any issues and solve them together. It is unlikely to have the same amount of collaboration with customers as in my internship, as most university projects do not have a dedicated person to act as the role of the customer constantly involved to provide new scope. As I learned at Amazon, this can also be a benefit, as customers have infinite wants. The scope of projects for a university should have limitations to be reasonably assessed. 
 
+Collective code ownership (XP) in the industry allows each team member to make changes to any part of a codebase. This may not work as well in a university context, as there are substantial time constraints. Under these constraints, the time needed to switch to a different module - reading documentation and understanding code - may be inefficient. I prefer the system of weak code ownership where modules are assigned to owners, but team members can modify other modules if they feel the need to do so. This means that there is always at least one person who has deep knowledge of some part of the codebase. I have experienced this system in a university team project where some team members remained on the same code area while others switched between the front and backend. I found it helpful to understand the codebase while switching between areas by talking with the existing members on the codebase.
