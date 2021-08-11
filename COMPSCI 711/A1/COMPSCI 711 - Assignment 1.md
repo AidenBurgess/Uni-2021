@@ -10,25 +10,13 @@
 | Graph 2 | 3        | 2                | 4               |
 |         |          |                  |                 |
 
-### (b) NOT DONE
+### (b) 
 
-[COMPSCI 711 (3 unread) (piazza.com)](https://piazza.com/class/kr2ysgz46du125?cid=9)
+<img src="C:\Users\aiden\AppData\Roaming\Typora\typora-user-images\image-20210811224419986.png" alt="image-20210811224419986" style="zoom:80%;" />
 
-Dilation: Maximum #lines an edge is mapped to
+Dilation: 2
 
-Congestion: Maximum #edges mapped on a single link
-
-Want to minimise dilation
-
-
-
-Original vertices: a,b,c,d,e,f
-
-New vertices: 0,1,2,3,4,5,6,7
-
-
-
-<img src="C:\Users\aiden\AppData\Roaming\Typora\typora-user-images\image-20210810110311317.png" alt="image-20210810110311317" style="zoom:80%;" />
+Congestion: 1
 
 ## 2. 
 
@@ -56,13 +44,13 @@ $b_i$ is greater than or equal to all elements of $s_1$, $b_i'$ is less than or 
 
 <img src="C:\Users\aiden\AppData\Roaming\Typora\typora-user-images\image-20210810183339908.png" alt="image-20210810183339908" style="zoom:67%;" />
 
-Talk about computation time and efficiency
+Source-partitioned Dijkstra's can only utilise 6 processes at a time. This is because the number of processes is restricted by the number of nodes in the graph. One process performs Dijkstra's single-source algorithm for each node. Therefore, there is no inter-process communication so no communication overhead. The parallel run-time when p < n is $O(n^2)$. However, as can be seen in the example the isoefficiency is $O(n^3)$. This algorithm does not scale well (performs about as well as non-parallel) as the number of processors scale.​
 
-Source partitioned Dijkstra's can only utilise 6 processes
+Source-parallel Dijkstra's can efficiently utilise all 24 processors. It has 4 partitions, each with 6 processes each. It is significantly more performant than source-partitioned Dijkstra's algorithm. In contrast to source-partitioned Dijkstra's, there is communication overhead of $O(n\log{p})$​​. ​The isoefficiency of this formulation is $O((p\log{p})^{1.5})$​
 
 
 
-## 4. NOT DONE
+## 4. 
 
 Note: Algorithm derived from slide 45 of *The Evolution of P Systems, to Hyperday P Systems, to P Modules* by Michael J.Dinneen, Yun-Bum Kim and Radu Nicolescu
 
@@ -82,7 +70,7 @@ At the start of the process, the nodes are empty. Then they all transition to st
 
 Otherwise, the node does have a child (or many), in which case it increments it's height (1). If there are multiple children, this information is discarded as it is not useful via (2). When (1) occurs, it also sends a message to its parents. This is to inform them that they need to increment their height.
 
-This will loop until all nodes end in state $s_2$. The number of $h$'s is the height of the node.
+This will loop until all nodes end in state $s_2$​. The number of $h$​'s is the height of the node. There is a side-effect which is that all other nodes will also store their height.
 
 ## 5.
 
