@@ -74,11 +74,22 @@ This will loop until all nodes end in state $s_2$​. The number of $h$​'s is 
 
 ## 5.
 
-### (a) NOT DONE
+### (a) 
 
-Run Luby's Maximal Independent Set Algorithm to retrieve a maximally independent set $W$. The set $W'=V-W$ is a minimal vertex cover.
+#### Algorithm
 
-Proof by contradiction:
+```pseudocode
+FUNCTION MinimalVertexCover(G)
+    set MIS = MaximalIndependentSet(G)
+    return V - MIS
+end FUNCTION
+```
+
+Run Luby's Maximal Independent Set Algorithm to retrieve a maximally independent set $W$.
+
+The set $W'=V-W$​ is a minimal vertex cover.
+
+#### Proof $W'$ is a vertex cover
 
 Let $G = (V,E)$ be a graph.
 
@@ -86,13 +97,21 @@ Let $W$​​​ be a maximally independent set of $G$.
 
 Let $W'=V-W$
 
-There are no edges between any vertices in W.
+By definition, there are no edges between any vertices in $W$​.
 
-As W is a MIS, adding any vertex from W' does not give an independent set. Therefore, there is an edge between all vertices in W' and at least one vertex in W.
+Adding any vertex from $W'$ to $W$ does not give an independent set. 
 
-In fact,  
+There is an edge between some vertex in $W'$ and any vertex in $W$. Therefore, $W'$ is a vertex cover.
 
-[graph theory - Relationship between Maximal Independent Set and Minimum Vertex Cover - Mathematics Stack Exchange](https://math.stackexchange.com/questions/1758900/relationship-between-maximal-independent-set-and-minimum-vertex-cover)
+#### Proof $W'$ is a minimal vertex cover
+
+Suppose there is a vertex $v$​ in $W'$ that can be removed such that $W'$​ is still a vertex cover.
+
+Vertex $v$ can now be added to $W$.
+
+By definition, there exists an edge between $v$ and some vertex in $W'$​. However, there also exists an edge between $v$ and some vertex in $W$. Therefore, $W$ is not an independent set. 
+
+Therefore, by contradiction, there can not exist a vertex which can be removed from $W'$ such that $W'$ is still a vertex cover. $W'$ is a minimal vertex cover.
 
 ### (b)
 
