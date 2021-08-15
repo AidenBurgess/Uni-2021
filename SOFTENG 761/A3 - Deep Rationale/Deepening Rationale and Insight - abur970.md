@@ -1,112 +1,39 @@
 # Deepening Rationale and Insight - abur970
 
-You need to demonstrate your awakened insight: 
-
-- Why was this paper useful? 
-- What from it will be valuable that your client would appreciate you understanding and being aware of? 
-- Was there anything you found in the paper that surprised you? 
-- Any new learning that will inform how you might tackle your project? 
-- How has it shaped your perspective on the project? 
-- From reading this paper, what questions have you come up that you would like to ask the client about the project’s rationale?
-
 Paper: [Mateos, Veronica & Gallardo, Alberto & Richter, Thomas & Bellido, Luis & Debicki, Peter & Villagra, Victor. (2011). LiLa Booking System: Architecture and Conceptual Model of a Rig Booking System for On-Line Laboratories. iJOE. 7. 26-35. 10.3991/ijoe.v7i4.1837. ](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.1017.7016&rep=rep1&type=pdf)
 
-"scarce and expensive" resource sharing should be optimised. A "booking system helps administer access to them"
+## Introduction to LiLa System
 
-What is this paper?
+I decided to review the research paper titled *LiLa Booking System: Architecture and Conceptual Model of a Rig Booking System for On-Line Laboratories*. The "Library of Labs" (LiLa) booking system is a system that manages the reservations for "scarce and expensive resources" for rigs in laboratories. A rig is some physical hardware that is controlled remotely via these reservations. An example of a rig would be a robot.
 
-"This paper reports on the architecture and conceptual model of the [LiLa] booking system". "The design of the system is based on a requirements analysis". LiLa stands for "Library of Labs", and facilitates virtual and remote experiments for online students. Students can interact with LiLa with just a web browser. "Challenge of controlling access [to limited resources] to avoid conflicts and to maximise their availability"
+The paper focuses on the design and architecture of LiLa, as well as the users and their interactions. Teachers can administer experiments for students, which allows the students to book a time slot to interact with rigs. Students can interact with LiLa through the LiLa Portal through a Web browser. The authors also identify challenges with "controlling access to [rigs] to avoid conflicts and to maximise their availability."
 
-LiLa is built around 3 different portal user roles: content providers, teachers, and students. 5 Elements: experiments, rigs, reservation for teachers, reservation for students, and tickets.
+## Why was this paper useful? 
 
-No need for a central admin with separation of roles and Shibboleth (authentication and authorization mechanism). 
+This paper gave me greater insight into the rationale of my project. Before reading this paper, I had not thought deeply about the rationale of this project. I understood that a booking and user management system would be helpful to an administrator, but I couldn't visualise the bigger picture. The abstract of this paper clearly provides insight into why their system was needed, and therefore provided me with understanding as well. Some sort of booking system is crucial in optimising the use of limited and costly resources. That system allows the resources to be shared, increasing the utilisation of the resources, making the most out of what is available to help students and staff learn and research their areas of expertise.
 
+This paper elaborates on the roles of the users of a booking system. It identifiers content providers, teachers, and students as the users of the application. This is in contrast to our system, whose stakeholders are the super-admins, admins, and end-users, which could be students or staff. These stakeholders must be identified as their values determine how helpful any service will be for them. A critical difference between our client's system and LiLa's user role is that there is not a concept of a teacher in our system. Instead, the resources are freely available, and the admin role is a restricted version of the super-admin role.
 
+It also gives a solid technical example of how a booking system can be implemented for resources. It includes many helpful UML diagrams, such as sequence diagrams, activity diagrams, and class diagrams.
 
-"Several experiments can operate on the same rig (same as our system). An experiment cannot be run on  more than one rig (same as ours too) as they didn't want to increase the overall complexity of the system unnecessarily."
+## What from it will be valuable that your client would appreciate you understanding and being aware of? 
 
+I think my client will appreciate that there are security concerns around access and privacy that need to be examined. We should be helping our users while simultaneously respecting their privacy. I also can relate more to our client - who acts as the admin - and their needs from the system, rather than only focusing on the end-users (academic staff and students). They would also appreciate that I understand some of the potential ways users interact with existing solutions and the flows of different scenarios, such as adding a new resource.
 
+## Was there anything you found in the paper that surprised you? 
 
-User's responsibility to name the rigs, and keep them meaningful and avoid collisions.
+The goal of LiLa was not just to produce a booking system but that the booking system had to be compatible with other methods to increase its reach and impact. I was surprised at the complexity and scope of the system and the interconnectivity between the resources and the various users of the system. It was also surprising that access control was mandated from the client-side, resulting in less security.
 
+## Any new learning that will inform how you might tackle your project? 
 
+Even in a complicated system such as LiLa, they still have some point where they trust the user's to do what they believe is correct. They provide flexibility instead of enforcing a rigid structure. For example, they trust the users to name the resources with meaningful names and prevent naming conflicts.
 
-ROLES
+## How has it shaped your perspective on the project? 
 
-"Content providers act as vendors who provide their services.
+My personal discovery of the deeper rationale of the project reframes my perspective from potential solutions being used as a convenience to possible solutions improving the valued use of hardware for the purpose of academic research.
 
-Teachers act as representatives for the vendors
+This paper has shifted my focus from the need to satisfy not just the end-user but also the super admins and admins for my project. It doesn't just focus on the end users' (students) perspective but equally on the experience of the content providers and teachers.
 
-Students act as customers"
+## From reading this paper, what questions have you come up that you would like to ask the client about the project's rationale?
 
-"Content providers do not need to care about the fine-grained time-slots distribution among students"
-
-"Students are user of LiLa experiments. ... To run an experiment that requires booking, a student must have a named account"
-
-Which of these roles can I translate into our use case (super admin, admin, end user)? I think in our system there is no need for a teacher role, as we don't want as much restriction as LiLa.
-
-
-
-To manage bookings, tickets are used. A student receives a ticket when they enter a valid reservation code. Once received, they can view the list of time slots which the rig is still available for use. When the student selects a time slot, the system creates a stamped ticket for the student. Stamped tickets grant students access to rigs in the time slot selected by the student. (Can see some user flow figure). The ticket is only valid for one time slot at a time, and is only allowed to be reused after performing the experiment.
-
-
-
-In our use case we kinda have permanent tickets where end users are always granted access to see a specific resource.
-
-
-
-TECHNICAL PERSPECTIVE
-
-It seems like they decided to follow many existing methods such as SCORM and IEEE 1484.11.2 - 2003 Standard for Learning Technology (some specification for ECMAScript)
-
-ACCESS CONTROL
-
-"LiLa  embeds a JavaScript code fragment to every uploaded  experiment that requires the booking system."
-
-This code fragment "is responsible for checking  against a RESTful server that the user of an  experiment has a valid stamped ticket and that she is  accessing the experiment at her reserved time-slot. If this  is not the case, the code will render an informative  message and will redirect the user to an interface (hosted  in LiLa) to allow her making a new reservation"
-
-Why did they use this client-side access control fragment?
-
-Compatibility: Their experiments can be exported from LiLa into other systems, while still having access control.
-
-However there is a downside: "Students with appropriate programming skills could locally edit the JavaScript code to their advantage and overpass the access control."
-
-This downside can be overlooked as LiLa is a tool to help administer rigs availability, and that level of rubustness is not in scope for LiLa. (In our project we probably need better access control than this.) They also had to adhere to the requirement of sticking to "interfaces guaranteed by SCORM and these are based on client-side execution of JavaScript."
-
-Furthermore, we could also enforce ticket checking on the server side anyway, as has been done before with WebLabs (University of Cambridge).
-
-This method also restricts execution to Javascript devices, which is also a SCORM restriction, so no real restriction there.
-
-
-
-Shibboleth is a federative infrastructure for web sign-on that allows sites to make informed authorization decisions for individual access of protected online resources in a privacy-preserving manner.
-
-
-
-BOOKING SYSTEM
-
-"The LiLa Booking System is implemented as a client-server solution." "The server is a Web application. [sic] It implements a RESTful API."
-
-"The server persists all reservations-related data in a  database. The persisted data include information about the  rigs, time-slots reserved and a codified user unique  identifier (to preserve user privacy)."
-
-
-
-SCENARIOS
-
-Activity diagram available for "making a rig available and using it."
-
-How a content provider makes a rig available for teachers. 
-
-- Add a new rig object
-- Update booking system to allow this rig to be booked
-- \# Instances of this rig
-- \# users per instance of the rig (typically 1)
-
-How a teacher allocates resources for her students
-
-- Not too relevant as we don't have this concept of assigning or giving students access to experiments
-- Looks like the reservation slots are managed with a calendar interface (Fig. 12)
-
-How a student accesses a schedule-controlled rig
-
-- Teacher gives URL and booking code
+I want to ask my client whether they think there is value in sharing this booking system or making it compatible with other systems. In the paper, they mention that the amount of security needed depends on the requirements, and for their use case, they didn't require strict access control to the reservations. Therefore, it would be essential to ask my client how much the super-admins, admins, and end-users value this security for any potential solutions.
