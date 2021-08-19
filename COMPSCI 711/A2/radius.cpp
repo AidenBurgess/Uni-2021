@@ -4,27 +4,32 @@
 #include <iterator>
 #include <sstream>
 #include <list>
+#include <algorithm>
 
 using namespace std;
+
+// Code for Graph and BFS implementation from: https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/
+// The code has been modified to return the depth and to detect if the graph is connected
 
 // This class represents a directed graph using
 // adjacency list representation
 class Graph
 {
-  int V; // No. of vertices
 
   // Pointer to an array containing adjacency
   // lists
   list<int> *adj;
 
 public:
+  int V; // No. of vertices
+
   Graph(int V); // Constructor
 
   // function to add an edge to graph
   void addEdge(int v, int w);
 
-  // prints BFS traversal from a given source s
-  void BFS(int s);
+  // BFS traversal from a given source s, returns the depth
+  int BFS(int s);
 };
 
 Graph::Graph(int V)
@@ -38,7 +43,13 @@ void Graph::addEdge(int v, int w)
   adj[v].push_back(w); // Add w to v’s list.
 }
 
-void Graph::BFS(int s)
+struct element
+{
+  int node;
+  int depth;
+};
+
+int Graph::BFS(int s)
 {
   // Mark all the vertices as not visited
   bool *visited = new bool[V];
@@ -46,45 +57,49 @@ void Graph::BFS(int s)
     visited[i] = false;
 
   // Create a queue for BFS
-  list<int> queue;
+  list<element> queue;
 
   // Mark the current node as visited and enqueue it
   visited[s] = true;
-  queue.push_back(s);
+  queue.push_back({s, 0});
 
   // 'i' will be used to get all adjacent
   // vertices of a vertex
   list<int>::iterator i;
 
+  element currentNode;
   while (!queue.empty())
   {
     // Dequeue a vertex from queue and print it
-    s = queue.front();
-    cout << s << " ";
+    currentNode = queue.front();
     queue.pop_front();
 
     // Get all adjacent vertices of the dequeued
     // vertex s. If a adjacent has not been visited,
     // then mark it visited and enqueue it
-    for (i = adj[s].begin(); i != adj[s].end(); ++i)
+    for (i = adj[currentNode.node].begin(); i != adj[currentNode.node].end(); ++i)
     {
       if (!visited[*i])
       {
         visited[*i] = true;
-        queue.push_back(*i);
+        queue.push_back({*i, currentNode.depth + 1});
       }
     }
   }
+
+  for (int i = 0; i < V; i++)
+  {
+    if (visited[i] == false)
+    {
+      throw "Not strongly connected!";
+    }
+  }
+  return currentNode.depth;
 }
 
-vector<vector<int>> readGraph()
+Graph readGraph(int numNodes)
 {
-  int numNodes;
   vector<vector<int>> adjacencyList;
-
-  // Read in number of nodes
-  cin >> numNodes;
-  cin.ignore();
   Graph g(numNodes);
 
   // Read in adjacency list
@@ -104,28 +119,49 @@ vector<vector<int>> readGraph()
   {
     for (col = row->begin(); col != row->end(); ++col)
     {
-      cout << node << *col << endl;
+      // cout << node << *col << endl;
       g.addEdge(node, *col);
     }
     ++node;
   }
 
-  cout << "Following is Breadth First Traversal "
-       << "(starting from vertex 0) \n";
-  g.BFS(0);
-
-  return adjacencyList;
+  return g;
 }
 
 int main()
 {
-  vector<string> msg{"Hello", "C++", "World", "from", "VS Code", "and the C++ extension!"};
-
-  for (const string &word : msg)
+  int numNodes;
+  while (true)
   {
-    cout << word << " ";
-  }
-  cout << endl;
+    cin >> numNodes;
+    cin.ignore();
+    if (numNodes == 0)
+    {
+      break;
+    }
 
-  readGraph();
+    Graph graph = readGraph(numNodes);
+
+    vector<int> eccs;
+    bool notConnectedFlag = false;
+    for (int i = 0; i < graph.V; ++i)
+    {
+      try
+      {
+        int ecc = graph.BFS(i);
+        eccs.push_back(ecc);
+      }
+      catch (const char *msg)
+      {
+        cout << "None" << endl;
+        notConnectedFlag = true;
+        break;
+      }
+    }
+    if (!notConnectedFlag)
+    {
+
+      cout << *min_element(eccs.begin(), eccs.end()) << endl;
+    }
+  }
 }
