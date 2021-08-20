@@ -129,45 +129,102 @@ Graph readGraph(int numNodes)
   return g;
 }
 
-int main()
+void findRadiusSequential(Graph graph, int numNodes)
 {
-  int numNodes;
-  while (true)
+  vector<int> eccs(numNodes, 0);
+  bool notConnectedFlag = false;
+
+  for (int i = 0; i < graph.V; ++i)
   {
-    cin >> numNodes;
-    cin.ignore();
-    if (numNodes == 0)
+    try
     {
+      int ecc = graph.BFS(i);
+      eccs[i] = ecc;
+    }
+    catch (const char *msg)
+    {
+      notConnectedFlag = true;
       break;
     }
+  }
+  if (notConnectedFlag)
+  {
+    cout << "None" << endl;
+  }
+  else
+  {
+    cout << *min_element(eccs.begin(), eccs.end()) << endl;
+  }
+}
 
-    Graph graph = readGraph(numNodes);
-
-    vector<int> eccs(numNodes, 0);
-    bool notConnectedFlag = false;
+void findRadiusParallel(Graph graph, int numNodes)
+{
+  vector<int> eccs(numNodes, 0);
+  bool notConnectedFlag = false;
 
 #pragma omp parallel for
-    for (int i = 0; i < graph.V; ++i)
+  for (int i = 0; i < graph.V; ++i)
+  {
+    try
     {
-      try
-      {
-        int ecc = graph.BFS(i);
-        // cout << ecc;
-        eccs[i] = ecc;
-      }
-      catch (const char *msg)
-      {
-        notConnectedFlag = true;
-      }
+      int ecc = graph.BFS(i);
+      eccs[i] = ecc;
     }
+    catch (const char *msg)
+    {
+      notConnectedFlag = true;
+    }
+  }
 #pragma omp barrier
-    if (notConnectedFlag)
-    {
-      cout << "None" << endl;
-    }
-    else
-    {
-      cout << *min_element(eccs.begin(), eccs.end()) << endl;
-    }
+  if (notConnectedFlag)
+  {
+    cout << "None" << endl;
+  }
+  else
+  {
+    cout << *min_element(eccs.begin(), eccs.end()) << endl;
+  }
+}
+
+int readNumNodes()
+{
+  int numNodes;
+  cin >> numNodes;
+  cin.ignore();
+
+  return numNodes;
+}
+
+#include <chrono>
+#include <utility>
+
+typedef std::chrono::high_resolution_clock::time_point TimeVar;
+
+#define duration(a) std::chrono::duration_cast<std::chrono::nanoseconds>(a).count()
+#define timeNow() std::chrono::high_resolution_clock::now()
+
+template <typename F, typename... Args>
+double funcTime(F func, Args &&...args)
+{
+  TimeVar t1 = timeNow();
+  func(std::forward<Args>(args)...);
+  return duration(timeNow() - t1);
+}
+
+int main()
+{
+
+  while (true)
+  {
+    int numNodes = readNumNodes();
+    if (numNodes == 0)
+      break;
+
+    Graph graph = readGraph(numNodes);
+    // double timeTaken = funcTime(findRadiusParallel, graph, numNodes);
+    double timeTaken = funcTime(findRadiusSequential, graph, numNodes);
+    cout << endl
+         << "Time taken: " << timeTaken << endl;
+    // findRadius(graph, numNodes);
   }
 }
