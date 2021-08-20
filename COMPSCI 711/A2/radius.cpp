@@ -1,3 +1,4 @@
+#include <omp.h>
 #include <iostream>
 #include <vector>
 #include <string>
@@ -142,25 +143,30 @@ int main()
 
     Graph graph = readGraph(numNodes);
 
-    vector<int> eccs;
+    vector<int> eccs(numNodes, 0);
     bool notConnectedFlag = false;
+
+#pragma omp parallel for
     for (int i = 0; i < graph.V; ++i)
     {
       try
       {
         int ecc = graph.BFS(i);
-        eccs.push_back(ecc);
+        // cout << ecc;
+        eccs[i] = ecc;
       }
       catch (const char *msg)
       {
-        cout << "None" << endl;
         notConnectedFlag = true;
-        break;
       }
     }
-    if (!notConnectedFlag)
+#pragma omp barrier
+    if (notConnectedFlag)
     {
-
+      cout << "None" << endl;
+    }
+    else
+    {
       cout << *min_element(eccs.begin(), eccs.end()) << endl;
     }
   }
