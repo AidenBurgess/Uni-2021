@@ -11,6 +11,7 @@ using namespace std;
 
 // Code for Graph and BFS implementation from: https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/
 // The code has been modified to return the depth and to detect if the graph is connected
+// Code for timing funcTime from: https://stackoverflow.com/questions/22387586/measuring-execution-time-of-a-function-in-c (jahid & Zitrax)
 
 // This class represents a directed graph using
 // adjacency list representation
@@ -175,7 +176,6 @@ void findRadiusParallel(Graph graph, int numNodes)
       notConnectedFlag = true;
     }
   }
-#pragma omp barrier
   if (notConnectedFlag)
   {
     cout << "None" << endl;
@@ -221,10 +221,9 @@ int main()
       break;
 
     Graph graph = readGraph(numNodes);
-    // double timeTaken = funcTime(findRadiusParallel, graph, numNodes);
-    double timeTaken = funcTime(findRadiusSequential, graph, numNodes);
+    double timeTaken = funcTime(findRadiusParallel, graph, numNodes);
+    // double timeTaken = funcTime(findRadiusSequential, graph, numNodes);
     cout << endl
          << "Time taken: " << timeTaken << endl;
-    // findRadius(graph, numNodes);
   }
 }
