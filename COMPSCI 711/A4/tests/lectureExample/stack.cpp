@@ -4,5 +4,5 @@ using namespace std;
 
 void Stack::createStack()
 {
-  cout << "Enter the size of the stack: ";
+  cout << "Enter the size of the stack: " << endl;
 }

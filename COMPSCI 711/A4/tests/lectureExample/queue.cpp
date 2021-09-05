@@ -4,5 +4,5 @@ using namespace std;
 
 void Queue::createQueue()
 {
-  cout << "Enter the size of the queue: ";
+  cout << "Enter the size of the queue: " << endl;
 }

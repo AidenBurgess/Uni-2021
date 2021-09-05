@@ -8,6 +8,7 @@ void Simulator::start()
 {
   Queue q;
   q.createQueue();
-  
+  Stack s;
+  s.createStack();
   cout << "Simulator::start()" << endl;
 }
