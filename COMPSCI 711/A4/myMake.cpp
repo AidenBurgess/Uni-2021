@@ -160,8 +160,17 @@ int main(int argc, char *argv[])
 {
   // Check if filename passed in as argument
   string filename = "Makefile";
+
   if (argc > 1)
-    filename = argv[1];
+  {
+    if (string(argv[1]) != "-f")
+    {
+      cout << "Invalid argument. Usage: ./myMake -f <filename>" << endl;
+      return 1;
+    }
+    else
+      filename = argv[2];
+  }
 
   auto nodeMap = parseMakefile(filename);
   // printNodeMap(nodeMap);
