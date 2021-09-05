@@ -8,7 +8,27 @@
 #include <sys/types.h>
 #include <map>
 #include <thread>
+#include <mutex>
+#include <set>
 using namespace std;
+
+template <typename T, typename Compare = less<T>>
+class concurrent_set
+{
+private:
+  set<T, Compare> set_;
+  mutex mutex_;
+
+public:
+  typedef typename set<T, Compare>::iterator iterator;
+
+  pair<iterator, bool>
+  insert(const T &val)
+  {
+    unique_lock<mutex> lock(mutex_);
+    return set_.insert(val);
+  }
+};
 
 struct dependencyNode
 {
@@ -16,6 +36,8 @@ struct dependencyNode
   vector<string> dependencies;
   string command;
 };
+
+concurrent_set<string> alreadyUpdated;
 
 vector<string> split(string str, char delimiter)
 {
@@ -72,7 +94,10 @@ map<string, dependencyNode> parseMakefile(string fileName)
   }
 
   else
+  {
     cout << "Unable to open file";
+    exit(1); // terminate with error
+  }
   return nodeMap;
 }
 
@@ -85,7 +110,7 @@ time_t getFileChangedTime(string fileName)
   return attr.st_mtime;
 }
 
-bool getChangedDependencies(map<string, dependencyNode> nodeMap, string target)
+bool dependencyChanged(map<string, dependencyNode> nodeMap, string target)
 {
   auto dependencies = nodeMap[target].dependencies;
   auto targetTime = getFileChangedTime(target);
@@ -124,14 +149,19 @@ void issueCommands(dependencyNode node, map<string, dependencyNode> nodeMap)
 
     try
     {
-      // Check if any dependencies have changed
-      if (getChangedDependencies(nodeMap, node.target) || !fileExists(node.target))
+      // Check if target file has already been updated
+      if (alreadyUpdated.insert(node.target).second)
       {
-        cout << node.command << endl;
-        system(node.command.c_str());
+        // Check if any dependencies have changed
+        if (dependencyChanged(nodeMap, node.target) || !fileExists(node.target))
+        {
+          cout << "Executing build for " << node.target << endl;
+          cout << node.command << endl;
+          system(node.command.c_str());
+        }
+        else
+          cout << "Skipping build for: " << node.target << endl;
       }
-      else
-        cout << "Skipping build for: " << node.target << endl;
     }
     catch (exception &e)
     {
