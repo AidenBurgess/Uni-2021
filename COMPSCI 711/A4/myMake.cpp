@@ -23,9 +23,7 @@ vector<string> split(string str, char delimiter)
   string tmp;
   vector<string> words;
   while (getline(ss, tmp, delimiter))
-  {
     words.push_back(tmp);
-  }
 
   return words;
 }
@@ -34,7 +32,7 @@ void printVector(vector<string> v)
 {
   for (auto i = v.begin(); i != v.end(); ++i)
     cout << *i << ' ';
-  cout << '\n';
+  cout << endl;
 }
 
 dependencyNode readTargetAndDependencies(string line)
@@ -44,26 +42,21 @@ dependencyNode readTargetAndDependencies(string line)
   string target = words[0];
   // Remove colon from end
   target.pop_back();
+
   vector<string> dependencies;
   for (int i = 1; i < words.size(); i++)
-  {
     dependencies.push_back(words[i]);
-  }
-
-  // cout << target << endl;
-  // printVector(dependencies);
 
   dependencyNode node = {target, dependencies};
 
   return node;
 }
 
-map<string, dependencyNode> parseMakefile()
+map<string, dependencyNode> parseMakefile(string fileName)
 {
   map<string, dependencyNode> nodeMap;
-  vector<dependencyNode> dependencyNodes;
   string line;
-  ifstream myfile("Makefile");
+  ifstream myfile(fileName);
   if (myfile.is_open())
   {
     while (getline(myfile, line))
@@ -73,7 +66,6 @@ map<string, dependencyNode> parseMakefile()
       string tmp = line;
       node.command = tmp;
       getline(myfile, line);
-      dependencyNodes.push_back(node);
       nodeMap[node.target] = node;
     }
     myfile.close();
@@ -84,9 +76,7 @@ map<string, dependencyNode> parseMakefile()
   return nodeMap;
 }
 
-void skip()
-{
-}
+void skip() {}
 
 time_t getFileChangedTime(string fileName)
 {
@@ -99,17 +89,12 @@ bool getChangedDependencies(map<string, dependencyNode> nodeMap, string target)
 {
   auto dependencies = nodeMap[target].dependencies;
   auto targetTime = getFileChangedTime(target);
-  // cout << "Target: " << target << " " << targetTime << endl;
 
   for (auto dependency : dependencies)
   {
     auto fileChangedTime = getFileChangedTime(dependency);
-    // cout << "Dependency: " << dependency << " " << fileChangedTime << endl;
     if (fileChangedTime > targetTime)
-    {
-      // cout << dependency << " older than " << target << endl;
       return true;
-    }
   }
   return false;
 }
@@ -129,19 +114,13 @@ void issueCommands(dependencyNode node, map<string, dependencyNode> nodeMap)
     {
       auto dep = node.dependencies[i];
       if (nodeMap.find(dep) != nodeMap.end())
-      {
         threads[i] = thread(issueCommands, nodeMap[dep], nodeMap);
-      }
       else
-      {
         threads[i] = thread(skip);
-      }
     }
 
     for (auto &th : threads)
-    {
       th.join();
-    }
 
     try
     {
@@ -152,9 +131,7 @@ void issueCommands(dependencyNode node, map<string, dependencyNode> nodeMap)
         system(node.command.c_str());
       }
       else
-      {
-        cout << "Skipping " << node.target << endl;
-      }
+        cout << "Skipping build for: " << node.target << endl;
     }
     catch (exception &e)
     {
@@ -179,9 +156,14 @@ void printNodeMap(map<string, dependencyNode> nodeMap)
   }
 }
 
-int main()
+int main(int argc, char *argv[])
 {
-  auto nodeMap = parseMakefile();
+  // Check if filename passed in as argument
+  string filename = "Makefile";
+  if (argc > 1)
+    filename = argv[1];
+
+  auto nodeMap = parseMakefile(filename);
   // printNodeMap(nodeMap);
   issueCommands(nodeMap["a.out"], nodeMap);
   return 0;
