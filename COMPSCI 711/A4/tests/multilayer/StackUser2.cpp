@@ -8,7 +8,7 @@ using namespace std;
 void stackUser2()
 {
   stackUser();
-  cout << "Stack User2 called" << endl;
+  cout << "Stack User2  called" << endl;
 }
 
 #endif // !STACK_USER2

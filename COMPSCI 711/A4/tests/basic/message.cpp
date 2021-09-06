@@ -4,5 +4,5 @@ using namespace std;
 
 void Message::printMessage()
 {
-  cout << "Hello rld!" << endl;
+  cout << "Hello world!" << endl;
 }
