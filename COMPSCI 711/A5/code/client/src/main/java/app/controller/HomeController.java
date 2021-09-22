@@ -23,6 +23,9 @@ public class HomeController {
         fileListView.setItems(files);
         List<String> filesList = Client.getFilesList();
         files.addAll(filesList);
+
+        String file = Client.getFile("test.txt");
+        System.out.println(file);
     }
 
     @FXML

@@ -1,5 +1,7 @@
 package app.socket;
 
+import app.cache.FileCache;
+
 import java.io.*;
 import java.net.InetAddress;
 import java.net.ServerSocket;
@@ -58,18 +60,32 @@ public class Server {
 
     private void readRequest(String request) throws IOException, ClassNotFoundException {
         if ("FILES".equals(request)) {
-//            TODO: Retrieve list of files from server
-            System.out.println("Retrieving list of files");
-            List<String> files = new ArrayList<>();
-            files.add("test.txt");
-            files.add("xd.txt");
-            out.writeObject(files);
-            out.flush();
+            retrieveFileList();
         } else if ("GET".equals(request)) {
 //            TODO: Retrive file from server or cache if exists
             String fileToGet = (String) in.readObject();
-            System.out.println(fileToGet);
+            retrieveFile(fileToGet);
         }
+    }
+
+    private void retrieveFileList() throws IOException {
+        System.out.println("Retrieving list of files");
+        List<String> files = Client.getFilesList();
+        out.writeObject(files);
+        out.flush();
+    }
+
+    private void retrieveFile(String fileName) throws IOException {
+        String contents;
+        if (FileCache.getInstance().isCached(fileName)) {
+            contents = FileCache.getInstance().getContents(fileName);
+        } else {
+            contents = Client.getFile(fileName);
+            FileCache.getInstance().addFile(fileName, contents);
+        }
+
+        out.writeObject(contents);
+        out.flush();
     }
 
 }
