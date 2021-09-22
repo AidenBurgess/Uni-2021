@@ -1,12 +1,13 @@
 package app.socket;
 
 import app.cache.FileCache;
+import app.logger.Logger;
 
 import java.io.*;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class Server {
@@ -62,8 +63,8 @@ public class Server {
         if ("FILES".equals(request)) {
             retrieveFileList();
         } else if ("GET".equals(request)) {
-//            TODO: Retrive file from server or cache if exists
             String fileToGet = (String) in.readObject();
+            Logger.get().add("user request: " + fileToGet + " at " + LocalDateTime.now());
             retrieveFile(fileToGet);
         }
     }
@@ -78,10 +79,13 @@ public class Server {
     private void retrieveFile(String fileName) throws IOException {
         String contents;
         if (FileCache.getInstance().isCached(fileName)) {
-            contents = FileCache.getInstance().getContents(fileName);
+            contents = FileCache.getInstance().getContent(fileName);
+            Logger.get().add("response: cached file" + fileName);
+
         } else {
             contents = Client.getFile(fileName);
             FileCache.getInstance().addFile(fileName, contents);
+            Logger.get().add("response: " + fileName + " downloaded from the server");
         }
 
         out.writeObject(contents);

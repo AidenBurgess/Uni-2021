@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="435.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.HomeController">
    <children>
-      <Button fx:id="downloadBtn" layoutX="110.0" layoutY="382.0" mnemonicParsing="false" onAction="#download" text="Download" />
+      <Button layoutX="110.0" layoutY="382.0" mnemonicParsing="false" onAction="#download" text="Download" />
       <Text layoutX="252.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Client">
          <font>
             <Font size="38.0" />
@@ -27,5 +27,6 @@
             <Font size="18.0" />
          </font>
       </Text>
+      <Button layoutX="190.0" layoutY="85.0" mnemonicParsing="false" onAction="#refresh" text="Refresh" />
    </children>
 </AnchorPane>

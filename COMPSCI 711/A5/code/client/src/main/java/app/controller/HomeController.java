@@ -1,6 +1,7 @@
 package app.controller;
 
 import app.socket.Client;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -21,16 +22,31 @@ public class HomeController {
     @FXML
     public void initialize() {
         fileListView.setItems(files);
-        List<String> filesList = Client.getFilesList();
-        files.addAll(filesList);
-
-        String file = Client.getFile("test.txt");
-        System.out.println(file);
+        retrieveFileList();
     }
 
     @FXML
     private void download() {
         String fileToDownload = fileListView.getSelectionModel().getSelectedItem();
-//        TODO: Make call to server
+        System.out.println("Downloading: " + fileToDownload);
+        new Thread(() -> {
+            String contents = Client.getFile(fileToDownload);
+            Platform.runLater(() -> outputArea.setText(contents));
+        }).start();
+    }
+
+    @FXML
+    private void refresh() {
+        retrieveFileList();
+    }
+
+    private void retrieveFileList() {
+        new Thread(() -> {
+            List<String> filesList = Client.getFilesList();
+            Platform.runLater(() -> {
+                files.clear();
+                files.addAll(filesList);
+            });
+        }).start();
     }
 }

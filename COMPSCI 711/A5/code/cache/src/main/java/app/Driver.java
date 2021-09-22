@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.util.List;
 
 public class Driver extends Application {
+    Thread server;
+
     @Override
     public void start(Stage primaryStage) throws IOException {
         FXMLLoader loader = new FXMLLoader();
@@ -26,15 +28,12 @@ public class Driver extends Application {
     public void init() {
         System.out.println("Starting up cache...");
         new Thread(() -> Server.getServer()).start();
-        new Thread(() -> {
-            List<String> filesList = Client.getFilesList();
-            System.out.println(filesList.toString());
-        }).start();
     }
 
     @Override
     public void stop() {
         System.out.println("Stopping cache...");
+        server.stop();
     }
 
     public static void main(String[] args) {
