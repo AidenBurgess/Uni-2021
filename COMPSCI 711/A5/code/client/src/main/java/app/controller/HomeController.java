@@ -7,7 +7,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 
 public class HomeController {
-    ObservableList<String> names = FXCollections.observableArrayList();
+    ObservableList<String> files = FXCollections.observableArrayList();
 
     @FXML
     private TextArea outputArea;
@@ -18,8 +18,8 @@ public class HomeController {
     @FXML
     public void initialize() {
 //        Get files from server
-        fileListView.setItems(names);
-        names.addAll("Julia", "Ian", "Sue", "Matthew", "Hannah", "Stephan", "Denise");
+        fileListView.setItems(files);
+        files.addAll("Julia", "Ian", "Sue", "Matthew", "Hannah", "Stephan", "Denise");
         System.out.println("XD");
     }
 

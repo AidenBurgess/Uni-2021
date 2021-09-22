@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class BigPicture extends Application {
+public class Driver extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         FXMLLoader loader = new FXMLLoader();
@@ -20,12 +20,12 @@ public class BigPicture extends Application {
     }
 
     public void init() {
-        System.out.println("Starting up client...");
+        System.out.println("Starting up cache...");
 
     }
 
     public void stop() {
-        System.out.println("Stopping client...");
+        System.out.println("Stopping cache...");
     }
 
     public static void main(String[] args) {
