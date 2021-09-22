@@ -6,6 +6,7 @@ import java.net.Socket;
 
 
 public class Client {
+    // Port number for the cache
     public static int PORT = 3333;
 
     private Client instance;
@@ -32,7 +33,6 @@ public class Client {
             e.printStackTrace();
         }
     }
-
 
 
 }

@@ -6,7 +6,8 @@ import java.net.Socket;
 
 
 public class Client {
-    public static int PORT = 3333;
+    // Port number for the server
+    public static int PORT = 3334;
 
     private Client instance;
     private Socket socket;
@@ -32,7 +33,6 @@ public class Client {
             e.printStackTrace();
         }
     }
-
 
 
 }
