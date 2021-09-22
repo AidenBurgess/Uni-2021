@@ -2,7 +2,6 @@ package app.cache;
 
 import app.logger.Logger;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableSet;
 
 import java.util.HashMap;
 import java.util.Map;

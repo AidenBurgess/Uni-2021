@@ -80,7 +80,7 @@ public class Server {
         String contents;
         if (FileCache.getInstance().isCached(fileName)) {
             contents = FileCache.getInstance().getContent(fileName);
-            Logger.get().add("response: cached file" + fileName);
+            Logger.get().add("response: cached " + fileName);
 
         } else {
             contents = Client.getFile(fileName);

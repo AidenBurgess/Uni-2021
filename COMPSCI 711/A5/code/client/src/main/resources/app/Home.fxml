@@ -9,24 +9,24 @@
 
 <AnchorPane prefHeight="435.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.HomeController">
    <children>
-      <Button layoutX="110.0" layoutY="382.0" mnemonicParsing="false" onAction="#download" text="Download" />
+      <Button layoutX="90.0" layoutY="382.0" mnemonicParsing="false" onAction="#download" text="Download" />
       <Text layoutX="252.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Client">
          <font>
             <Font size="38.0" />
          </font>
       </Text>
-      <ListView fx:id="fileListView" layoutX="46.0" layoutY="115.0" prefHeight="250.0" prefWidth="200.0" />
-      <Text layoutX="46.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Files on server">
+      <ListView fx:id="fileListView" layoutX="25.0" layoutY="123.0" prefHeight="250.0" prefWidth="200.0" />
+      <Text layoutX="26.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Files on server">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <TextArea fx:id="outputArea" editable="false" layoutX="348.0" layoutY="116.0" prefHeight="250.0" prefWidth="200.0" promptText="Select a file and press download..." />
-      <Text layoutX="348.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Downloaded contents">
+      <TextArea fx:id="outputArea" editable="false" layoutX="261.0" layoutY="123.0" prefHeight="250.0" prefWidth="317.0" promptText="Select a file and press download..." />
+      <Text layoutX="261.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Downloaded contents">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Button layoutX="190.0" layoutY="85.0" mnemonicParsing="false" onAction="#refresh" text="Refresh" />
+      <Button layoutX="170.0" layoutY="85.0" mnemonicParsing="false" onAction="#refresh" text="Refresh" />
    </children>
 </AnchorPane>

@@ -28,11 +28,13 @@ public class HomeController {
     @FXML
     private void download() {
         String fileToDownload = fileListView.getSelectionModel().getSelectedItem();
-        System.out.println("Downloading: " + fileToDownload);
-        new Thread(() -> {
-            String contents = Client.getFile(fileToDownload);
-            Platform.runLater(() -> outputArea.setText(contents));
-        }).start();
+        if (fileToDownload != null) {
+            System.out.println("Downloading: " + fileToDownload);
+            new Thread(() -> {
+                String contents = Client.getFile(fileToDownload);
+                Platform.runLater(() -> outputArea.setText(contents));
+            }).start();
+        }
     }
 
     @FXML

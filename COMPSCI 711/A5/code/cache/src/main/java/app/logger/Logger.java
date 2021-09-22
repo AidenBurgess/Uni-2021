@@ -2,8 +2,6 @@ package app.logger;
 
 import javafx.collections.ObservableList;
 
-import java.util.HashMap;
-
 public class Logger {
     private static Logger instance;
     private final ObservableList<String> fileList;
