@@ -1,24 +1,31 @@
 package app.controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.text.Text;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 
 public class HomeController {
-    @FXML
-    private Text text;
+    ObservableList<String> names = FXCollections.observableArrayList();
 
     @FXML
-    private Button button;
+    private TextArea outputArea;
+    @FXML
+    private ListView<String> fileListView;
+
 
     @FXML
     public void initialize() {
+//        Get files from server
+        fileListView.setItems(names);
+        names.addAll("Julia", "Ian", "Sue", "Matthew", "Hannah", "Stephan", "Denise");
         System.out.println("XD");
     }
 
     @FXML
-    private void handleButton() {
-        text.setText("You clicked the button!");
-        button.setText("You clicked me");
+    private void download() {
+        String fileToDownload = fileListView.getSelectionModel().getSelectedItem();
+//        TODO: Make call to server
     }
 }
