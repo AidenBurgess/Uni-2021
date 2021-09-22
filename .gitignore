@@ -1,2 +1,11 @@
 COMPSCI 711/A5/code/*/build/*
 COMPSCI 711/A5/code/*/.gradle/*
+COMPSCI 711/A5/code/cache/.gradle/6.3/executionHistory/executionHistory.bin
+COMPSCI 711/A5/code/cache/.gradle/6.3/executionHistory/executionHistory.lock
+COMPSCI 711/A5/code/cache/.gradle/6.3/fileContent/fileContent.lock
+COMPSCI 711/A5/code/cache/.gradle/6.3/fileHashes/fileHashes.bin
+COMPSCI 711/A5/code/cache/.gradle/6.3/fileHashes/fileHashes.lock
+COMPSCI 711/A5/code/cache/.gradle/6.3/javaCompile/classAnalysis.bin
+COMPSCI 711/A5/code/cache/.gradle/6.3/javaCompile/javaCompile.lock
+COMPSCI 711/A5/code/cache/.gradle/buildOutputCleanup/buildOutputCleanup.lock
+COMPSCI 711/A5/code/cache/.gradle/checksums/checksums.lock
