@@ -4,12 +4,17 @@ import java.io.*;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Server {
-    // Port number for the cache
-    public static int PORT = 3333;
+    // Port number for the server
+    public static int PORT = 3334;
 
     private static Server instance;
     private ObjectOutputStream out;
@@ -58,18 +63,39 @@ public class Server {
 
     private void readRequest(String request) throws IOException, ClassNotFoundException {
         if ("FILES".equals(request)) {
-//            TODO: Retrieve list of files from server
             System.out.println("Retrieving list of files");
-            List<String> files = new ArrayList<>();
-            files.add("test.txt");
-            files.add("xd.txt");
+            List<String> files = getFileList();
             out.writeObject(files);
             out.flush();
         } else if ("GET".equals(request)) {
-//            TODO: Retrive file from server or cache if exists
             String fileToGet = (String) in.readObject();
-            System.out.println(fileToGet);
+            System.out.println("Retrieving " + fileToGet);
+            String content = getFile(fileToGet);
+            out.writeObject(content);
+            out.flush();
         }
+    }
+
+    private List<String> getFileList() {
+        try {
+            return Files.walk(Paths.get("storage"))
+              .filter(Files::isRegularFile)
+              .map(Path::getFileName)
+              .map(Path::toString)
+              .collect(Collectors.toList());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new ArrayList<>();
+    }
+
+    private String getFile(String file) {
+        try {
+            return new String(Files.readAllBytes(Paths.get("storage/" + file)), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
 }

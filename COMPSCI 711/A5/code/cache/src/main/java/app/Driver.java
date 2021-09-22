@@ -1,5 +1,6 @@
 package app;
 
+import app.socket.Client;
 import app.socket.Server;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -8,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 
 public class Driver extends Application {
     @Override
@@ -23,7 +25,11 @@ public class Driver extends Application {
     @Override
     public void init() {
         System.out.println("Starting up cache...");
-        Server.getServer();
+        new Thread(() -> Server.getServer()).start();
+        new Thread(() -> {
+            List<String> filesList = Client.getFilesList();
+            System.out.println(filesList.toString());
+        }).start();
     }
 
     @Override
