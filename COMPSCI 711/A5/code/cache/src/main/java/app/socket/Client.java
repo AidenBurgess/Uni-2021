@@ -9,12 +9,12 @@ public class Client {
     // Port number for the server
     public static int PORT = 3334;
 
-    private Client instance;
+    private static Client instance;
     private Socket socket;
     private OutputStream out;
     private InputStream in;
 
-    public Client getClient() {
+    public static Client getClient() {
         if (instance == null) {
             instance = new Client();
         }

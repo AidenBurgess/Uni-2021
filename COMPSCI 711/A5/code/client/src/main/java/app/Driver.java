@@ -1,5 +1,6 @@
 package app;
 
+import app.socket.Client;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,11 +20,12 @@ public class Driver extends Application {
         primaryStage.show();
     }
 
+    @Override
     public void init() {
         System.out.println("Starting up client...");
-
     }
 
+    @Override
     public void stop() {
         System.out.println("Stopping client...");
     }

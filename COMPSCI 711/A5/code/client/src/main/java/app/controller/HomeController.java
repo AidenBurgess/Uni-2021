@@ -1,10 +1,13 @@
 package app.controller;
 
+import app.socket.Client;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
+
+import java.util.List;
 
 public class HomeController {
     ObservableList<String> files = FXCollections.observableArrayList();
@@ -17,10 +20,9 @@ public class HomeController {
 
     @FXML
     public void initialize() {
-//        Get files from server
         fileListView.setItems(files);
-        files.addAll("Julia", "Ian", "Sue", "Matthew", "Hannah", "Stephan", "Denise");
-        System.out.println("XD");
+        List<String> filesList = Client.getFilesList();
+        files.addAll(filesList);
     }
 
     @FXML
