@@ -1,0 +1,14 @@
+result.exe : a.cpp b.o c.o d.o e.o f.o g.o
+	g++ -o result.exe a.cpp b.o c.o d.o e.o f.o g.o
+b.o : e.o f.o g.o
+	g++ -c b.h b.cpp e.o f.o g.o
+c.o : e.o f.o g.o
+	g++ -c c.h c.cpp e.o f.o g.o
+d.o : e.o f.o g.o
+	g++ -c d.h d.cpp e.o f.o g.o
+e.o : 
+	g++ -c e.h e.cpp
+f.o : 
+	g++ -c f.h f.cpp
+g.o : 
+	g++ -c g.h g.cpp

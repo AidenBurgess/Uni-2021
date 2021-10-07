@@ -1,0 +1,1 @@
+Measure-Command{.\a.exe -f make1.txt}

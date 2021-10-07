@@ -100,7 +100,11 @@ vector<string> split(string str, char delimiter)
   string tmp;
   vector<string> words;
   while (getline(ss, tmp, delimiter))
+  {
+    // Trim whitespace
+    tmp.erase(tmp.find_last_not_of(" \n\r\t") + 1);
     words.push_back(tmp);
+  }
 
   return words;
 }
@@ -110,11 +114,9 @@ dependencyNode readTargetAndDependencies(string line)
   vector<string> words = split(line, ' ');
 
   string target = words[0];
-  // Remove colon from end
-  target.pop_back();
   // Add the rest of the line to dependencies
   vector<string> dependencies;
-  for (int i = 1; i < words.size(); i++)
+  for (int i = 2; i < words.size(); i++)
     dependencies.push_back(words[i]);
 
   return {target, dependencies};
@@ -134,7 +136,6 @@ nodeGraph parseMakefile(string fileName)
       getline(myfile, line);
       string tmp = line;
       node.command = tmp;
-      getline(myfile, line);
       nodeMap[node.target] = node;
       if (firstTarget.empty())
         firstTarget = node.target;

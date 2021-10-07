@@ -1,0 +1,14 @@
+result.exe : a.cpp b.o c.o d.o e.o f.o g.o
+	timeout 10 && g++ -o result.exe a.cpp b.o c.o d.o e.o f.o g.o
+b.o : c.o
+	timeout 10 && g++ -c b.h b.cpp c.o
+c.o : d.o
+	timeout 10 && g++ -c c.h c.cpp d.o
+d.o : e.o
+	timeout 10 && g++ -c d.h d.cpp e.o
+e.o : f.o
+	timeout 10 && g++ -c e.h e.cpp f.o
+f.o : g.o
+	timeout 10 && g++ -c f.h f.cpp g.o
+g.o :
+	timeout 10 && g++ -c g.h g.cpp
