@@ -174,4 +174,37 @@
   month   = jun,
 }
 
+@Book{shoup_2011,
+  author    = {Shoup, Donald C.},
+  publisher = {Planners Press, American Planning Association},
+  title     = {The high cost of free parking},
+  year      = {2011},
+  place     = {Chicago, IL},
+}
+
+@InCollection{goodwin2001traffic,
+  author    = {Goodwin, Phillip B},
+  booktitle = {Handbook of transport systems and traffic control},
+  publisher = {Emerald Group Publishing Limited},
+  title     = {Traffic reduction},
+  year      = {2001},
+}
+
+@Misc{noauthor_documentation_nodate,
+  title    = {Documentation - {TypeScript} for {JavaScript} {Programmers}},
+  abstract = {Learn how TypeScript extends JavaScript},
+  language = {en},
+  url      = {https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html},
+  urldate  = {2021-10-13},
+}
+
+@InProceedings{7985711,
+  author    = {Gao, Zheng and Bird, Christian and Barr, Earl T.},
+  booktitle = {2017 IEEE/ACM 39th International Conference on Software Engineering (ICSE)},
+  title     = {To Type or Not to Type: Quantifying Detectable Bugs in JavaScript},
+  year      = {2017},
+  pages     = {758-769},
+  doi       = {10.1109/ICSE.2017.75},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}
