@@ -207,4 +207,15 @@
   doi       = {10.1109/ICSE.2017.75},
 }
 
+@Article{joshi-2015,
+  author  = {Joshi, Ankur and Kale, Saket and Chandel, Satish and Pal, D.},
+  journal = {British Journal of Applied Science & Technology},
+  title   = {{Likert Scale: Explored and Explained}},
+  year    = {2015},
+  number  = {4},
+  pages   = {396--403},
+  volume  = {7},
+  doi     = {10.9734/bjast/2015/14975},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}

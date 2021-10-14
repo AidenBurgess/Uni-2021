@@ -207,4 +207,28 @@
   doi       = {10.1109/ICSE.2017.75},
 }
 
+@Article{joshi-2015,
+  author  = {Joshi, Ankur and Kale, Saket and Chandel, Satish and Pal, D.},
+  journal = {British Journal of Applied Science & Technology},
+  title   = {{Likert Scale: Explored and Explained}},
+  year    = {2015},
+  number  = {4},
+  pages   = {396--403},
+  volume  = {7},
+  doi     = {10.9734/bjast/2015/14975},
+}
+
+@InProceedings{10.1007/978-3-319-75178-8_34,
+  author    = {Malawski, Maciej and Figiela, Kamil and Gajek, Adam and Zima, Adam},
+  booktitle = {Euro-Par 2017: Parallel Processing Workshops},
+  title     = {Benchmarking Heterogeneous Cloud Functions},
+  year      = {2018},
+  address   = {Cham},
+  editor    = {Heras, Dora B. and Boug{\'e}, Luc and Mencagli, Gabriele and Jeannot, Emmanuel and Sakellariou, Rizos and Badia, Rosa M. and Barbosa, Jorge G. and Ricci, Laura and Scott, Stephen L. and Lankes, Stefan and Weidendorfer, Josef},
+  pages     = {415--426},
+  publisher = {Springer International Publishing},
+  abstract  = {Cloud Functions, often called Function-as-a-Service (FaaS), pioneered by AWS Lambda, are an increasingly popular method of running distributed applications. As in other cloud offerings, cloud functions are heterogeneous, due to different underlying hardware, runtime systems, as well as resource management and billing models. In this paper, we focus on performance evaluation of cloud functions, taking into account heterogeneity aspects. We developed a cloud function benchmarking framework, consisting of one suite based on Serverless Framework, and one based on HyperFlow. We deployed the CPU-intensive benchmarks: Mersenne Twister and Linpack, and evaluated all the major cloud function providers: AWS Lambda, Azure Functions, Google Cloud Functions and IBM OpenWhisk. We make our results available online and continuously updated. We report on the initial results of the performance evaluation and we discuss the discovered insights on the resource allocation policies.},
+  isbn      = {978-3-319-75178-8},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}
