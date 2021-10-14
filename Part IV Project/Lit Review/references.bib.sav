@@ -231,4 +231,26 @@
   isbn      = {978-3-319-75178-8},
 }
 
+@Article{IonicFrameworkwithAngularforHybridAppDevelopment,
+  author   = {Juilee Waranashiwar and Manda Ukey},
+  journal  = {International Journal of New Technology and Research},
+  title    = {Ionic Framework with Angular for Hybrid App Development},
+  year     = {2018},
+  month    = {5},
+  number   = {5},
+  volume   = {4},
+  abstract = {Ionic framework is an open source cross platform tool which allows to develop hybrid application which work on different mobile platforms like android, IOS and windows without much efforts and increasing the ease of development. Ionic framework enhances the look and the feel of the UI of thenbsp hybrid application with the use ofnbsp HTML5 and CSS.},
+}
+
+@Article{figiela-2018,
+  author  = {Figiela, Kamil and Gajek, Adam and Zima, Adam and Obrok, Beata and Malawski, Maciej},
+  journal = {Concurrency and Computation: Practice and Experience},
+  title   = {{Performance evaluation of heterogeneous cloud functions}},
+  year    = {2018},
+  number  = {23},
+  pages   = {e4792},
+  volume  = {30},
+  doi     = {10.1002/cpe.4792},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}

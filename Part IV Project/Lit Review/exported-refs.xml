@@ -2,20 +2,15 @@
 <b:Sources xmlns:b="http://schemas.openxmlformats.org/officeDocument/2006/bibliography" xmlns="http://schemas.openxmlformats.org/officeDocument/2006/bibliography" SelectedStyle="">
     <b:Source>
         <b:Year>2018</b:Year>
-        <b:BIBTEX_Entry>inproceedings</b:BIBTEX_Entry>
-        <b:SourceType>ConferenceProceedings</b:SourceType>
-        <b:Title>Benchmarking Heterogeneous Cloud Functions</b:Title>
-        <b:Publisher>Springer International Publishing</b:Publisher>
-        <b:Tag>10.1007/978-3-319-75178-8_34</b:Tag>
-        <b:BIBTEX_Abstract>Cloud Functions, often called Function-as-a-Service (FaaS), pioneered by AWS Lambda, are an increasingly popular method of running distributed applications. As in other cloud offerings, cloud functions are heterogeneous, due to different underlying hardware, runtime systems, as well as resource management and billing models. In this paper, we focus on performance evaluation of cloud functions, taking into account heterogeneity aspects. We developed a cloud function benchmarking framework, consisting of one suite based on Serverless Framework, and one based on HyperFlow. We deployed the CPU-intensive benchmarks: Mersenne Twister and Linpack, and evaluated all the major cloud function providers: AWS Lambda, Azure Functions, Google Cloud Functions and IBM OpenWhisk. We make our results available online and continuously updated. We report on the initial results of the performance evaluation and we discuss the discovered insights on the resource allocation policies.</b:BIBTEX_Abstract>
-        <b:BookTitle>Euro-Par 2017: Parallel Processing Workshops</b:BookTitle>
+        <b:Volume>30</b:Volume>
+        <b:BIBTEX_Entry>article</b:BIBTEX_Entry>
+        <b:SourceType>JournalArticle</b:SourceType>
+        <b:Title>Performance evaluation of heterogeneous cloud functions</b:Title>
+        <b:Tag>figiela-2018</b:Tag>
+        <b:DOI>10.1002/cpe.4792</b:DOI>
         <b:Author>
             <b:Author>
                 <b:NameList>
-                    <b:Person>
-                        <b:Last>Malawski</b:Last>
-                        <b:First>Maciej</b:First>
-                    </b:Person>
                     <b:Person>
                         <b:Last>Figiela</b:Last>
                         <b:First>Kamil</b:First>
@@ -28,64 +23,19 @@
                         <b:Last>Zima</b:Last>
                         <b:First>Adam</b:First>
                     </b:Person>
+                    <b:Person>
+                        <b:Last>Obrok</b:Last>
+                        <b:First>Beata</b:First>
+                    </b:Person>
+                    <b:Person>
+                        <b:Last>Malawski</b:Last>
+                        <b:First>Maciej</b:First>
+                    </b:Person>
                 </b:NameList>
             </b:Author>
-            <b:Editor>
-                <b:NameList>
-                    <b:Person>
-                        <b:Last>Heras</b:Last>
-                        <b:Middle>B.</b:Middle>
-                        <b:First>Dora</b:First>
-                    </b:Person>
-                    <b:Person>
-                        <b:Last>Bougé</b:Last>
-                        <b:First>Luc</b:First>
-                    </b:Person>
-                    <b:Person>
-                        <b:Last>Mencagli</b:Last>
-                        <b:First>Gabriele</b:First>
-                    </b:Person>
-                    <b:Person>
-                        <b:Last>Jeannot</b:Last>
-                        <b:First>Emmanuel</b:First>
-                    </b:Person>
-                    <b:Person>
-                        <b:Last>Sakellariou</b:Last>
-                        <b:First>Rizos</b:First>
-                    </b:Person>
-                    <b:Person>
-                        <b:Last>Badia</b:Last>
-                        <b:Middle>M.</b:Middle>
-                        <b:First>Rosa</b:First>
-                    </b:Person>
-                    <b:Person>
-                        <b:Last>Barbosa</b:Last>
-                        <b:Middle>G.</b:Middle>
-                        <b:First>Jorge</b:First>
-                    </b:Person>
-                    <b:Person>
-                        <b:Last>Ricci</b:Last>
-                        <b:First>Laura</b:First>
-                    </b:Person>
-                    <b:Person>
-                        <b:Last>Scott</b:Last>
-                        <b:Middle>L.</b:Middle>
-                        <b:First>Stephen</b:First>
-                    </b:Person>
-                    <b:Person>
-                        <b:Last>Lankes</b:Last>
-                        <b:First>Stefan</b:First>
-                    </b:Person>
-                    <b:Person>
-                        <b:Last>Weidendorfer</b:Last>
-                        <b:First>Josef</b:First>
-                    </b:Person>
-                </b:NameList>
-            </b:Editor>
         </b:Author>
-        <b:Pages>415–426</b:Pages>
-        <b:StandardNumber> ISBN: 978-3-319-75178-8</b:StandardNumber>
-        <b:ConferenceName>Euro-Par 2017: Parallel Processing Workshops</b:ConferenceName>
-        <b:City>Cham</b:City>
+        <b:Pages>e4792</b:Pages>
+        <b:JournalName>Concurrency and Computation: Practice and Experience</b:JournalName>
+        <b:Number>23</b:Number>
     </b:Source>
 </b:Sources>
