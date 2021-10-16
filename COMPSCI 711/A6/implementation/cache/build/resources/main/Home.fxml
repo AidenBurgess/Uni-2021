@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="443.0" prefWidth="788.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.HomeController">
+<AnchorPane prefHeight="443.0" prefWidth="1327.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.HomeController">
    <children>
       <Text layoutX="47.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sent">
          <font>
@@ -14,23 +14,24 @@
          </font>
       </Text>
       <Button layoutX="47.0" layoutY="30.0" mnemonicParsing="false" onAction="#send" prefHeight="26.0" prefWidth="95.0" text="Send" />
-      <ListView fx:id="sentListView" layoutX="47.0" layoutY="124.0" prefHeight="250.0" prefWidth="214.0" />
-      <Text layoutX="289.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Received">
+      <ListView fx:id="sentListView" layoutX="47.0" layoutY="124.0" prefHeight="250.0" prefWidth="400.0" />
+      <Text layoutX="475.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Received">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <ListView fx:id="receivedListView" layoutX="289.0" layoutY="124.0" prefHeight="250.0" prefWidth="214.0" />
-      <Text layoutX="531.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ready">
+      <ListView fx:id="receivedListView" layoutX="475.0" layoutY="124.0" prefHeight="250.0" prefWidth="400.0" />
+      <Text layoutX="897.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ready">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <ListView fx:id="readyListView" layoutX="531.0" layoutY="124.0" prefHeight="250.0" prefWidth="214.0" />
+      <ListView fx:id="readyListView" layoutX="897.0" layoutY="124.0" prefHeight="250.0" prefWidth="400.0" />
       <Text fx:id="titleText" layoutX="301.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Middleware" wrappingWidth="222.4000427246093">
          <font>
             <Font size="28.0" />
          </font>
       </Text>
+      <Button layoutX="173.0" layoutY="30.0" mnemonicParsing="false" onAction="#clear" prefHeight="26.0" prefWidth="95.0" text="Clear" />
    </children>
 </AnchorPane>

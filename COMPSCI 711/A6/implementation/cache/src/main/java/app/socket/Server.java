@@ -35,7 +35,7 @@ public class Server {
             while (true) {
 
                 try (Socket clientConnection = socket.accept()) {
-                    System.out.println("Client connected!");
+                    System.out.println("Server connection established!");
 
                     InputStream inputStream = clientConnection.getInputStream();
 
@@ -44,8 +44,12 @@ public class Server {
                       new InputStreamReader(inputStream, StandardCharsets.UTF_8))
                       .lines()
                       .collect(Collectors.joining("\n"));
-                    // Add to state
-                    Received.get().add(text);
+                    if (text.length() == 13) {
+                        Received.get().addExpected(text);
+                    } else {
+                        // Add to state
+                        Received.get().add(text);
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

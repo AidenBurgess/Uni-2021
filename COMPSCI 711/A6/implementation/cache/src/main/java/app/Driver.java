@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Driver extends Application {
-    public static final int MIDDLEWARE_ID = 1;
+    public static final int MIDDLEWARE_ID = 5;
     Thread server;
 
     @Override
@@ -20,12 +20,14 @@ public class Driver extends Application {
         Scene scene = new Scene(layout);
         primaryStage.setScene(scene);
         primaryStage.show();
+        primaryStage.setTitle("Middleware " + MIDDLEWARE_ID);
     }
 
     @Override
     public void init() {
         System.out.println("Starting up middleware...");
-        new Thread(Server::getServer).start();
+        server = new Thread(Server::getServer);
+        server.start();
     }
 
     @Override

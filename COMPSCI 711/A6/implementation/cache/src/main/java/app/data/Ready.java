@@ -1,5 +1,6 @@
 package app.data;
 
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 
 public class Ready {
@@ -19,6 +20,11 @@ public class Ready {
     }
 
     public void add(String entry) {
-        messageList.add(entry);
+        System.out.println("add being called in READY");
+        Platform.runLater(() -> messageList.add(entry));
+    }
+
+    public void clear() {
+        messageList.clear();
     }
 }

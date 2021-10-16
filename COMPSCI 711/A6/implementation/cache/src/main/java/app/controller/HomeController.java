@@ -36,7 +36,13 @@ public class HomeController {
 
     @FXML
     private void send() {
-        new Thread(Client::send).start();
-        sent.add("XD");
+        new Thread(() -> Client.send(sent)).start();
+    }
+
+    @FXML
+    private void clear() {
+        sent.clear();
+        Received.get().clear();
+        Ready.get().clear();
     }
 }
