@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Driver extends Application {
-    public static final int MIDDLEWARE_ID = 5;
+    public static final int MIDDLEWARE_ID = 1;
     Thread server;
 
     @Override
@@ -34,6 +34,7 @@ public class Driver extends Application {
     public void stop() {
         System.out.println("Stopping middleware...");
         server.stop();
+        System.exit(0);
     }
 
     public static void main(String[] args) {

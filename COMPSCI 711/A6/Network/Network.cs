@@ -17,10 +17,10 @@ public class MessageHandler
     const int maxSleepTime = 10000;
 
     // The number of ports for receiving the message
-    const int numPorts = 3;
+    const int numPorts = 5;
 
     // Ports for receiving the message
-    int[] ports = { 8082, 8083, 8084 };
+    int[] ports = { 8082, 8083, 8084, 8085, 8086 };
 
     // Channel for receiving the message from the original sender of the message
     NetworkStream readStream;
