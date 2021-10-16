@@ -1,11 +1,11 @@
 
+X	java:S125="<This block of commented-out lines of code should be removed.(†€éˆ8¢‘ºÈ/
 W
 java:S4719M":Replace Charset.forName() call with StandardCharsets.UTF_8(‚ä–‹8È¦å¸È/
-m	java:S117,"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ç²İå8¡„ºÈ/
-P
-java:S1118":Add a private constructor to hide the implicit public one.(ñ·ÍŸ
-X	java:S125="<This block of commented-out lines of code should be removed.(†€éˆ8¢‘ºÈ/
 c
 java:S2142'"FEither re-interrupt this method or rethrow the "InterruptedException".(ä ¹€8»¬ŸºÈ/
 \
 java:S47198":Replace Charset.forName() call with StandardCharsets.UTF_8(°ÔÜ»ıÿÿÿÿ8ëŒ‚ºÈ/
+P
+java:S1118":Add a private constructor to hide the implicit public one.(ñ·ÍŸ
+m	java:S117,"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ç²İå8¡„ºÈ/
