@@ -15,13 +15,13 @@ public class Client {
     // Port number for the network
     public static final int NETWORK_PORT = 8081;
 
-    public static void send(ObservableList<String> sent) {
+    public static void send(ObservableList<String> sent, int numMessage) {
         String msgUUID = String.valueOf(System.currentTimeMillis());
 
-        String broadcast = "<" + msgUUID + "> from Middleware " + Driver.MIDDLEWARE_ID + " Hello World! <EOM>";
+        String broadcast = "<" + msgUUID + "> Msg #" + numMessage + " from Middleware " + Driver.MIDDLEWARE_ID + " Hello World! <EOM>";
         sendToMiddlewares(msgUUID);
         sendToNetwork(broadcast);
-        Platform.runLater(() -> sent.add(broadcast));
+        Platform.runLater(() -> sent.add(broadcast.substring(15)));
     }
 
     private static void sendToMiddlewares(String msgUUID) {

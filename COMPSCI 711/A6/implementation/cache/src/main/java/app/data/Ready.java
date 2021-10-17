@@ -20,8 +20,7 @@ public class Ready {
     }
 
     public void add(String entry) {
-        System.out.println("add being called in READY");
-        Platform.runLater(() -> messageList.add(entry));
+        Platform.runLater(() -> messageList.add(entry.substring(15)));
     }
 
     public void clear() {

@@ -15,6 +15,8 @@ public class HomeController {
     ObservableList<String> received = FXCollections.observableArrayList();
     ObservableList<String> ready = FXCollections.observableArrayList();
 
+    private int numMessage = 0;
+
     @FXML
     private Text titleText;
     @FXML
@@ -36,7 +38,8 @@ public class HomeController {
 
     @FXML
     private void send() {
-        new Thread(() -> Client.send(sent)).start();
+        new Thread(() -> Client.send(sent, numMessage)).start();
+        numMessage++;
     }
 
     @FXML

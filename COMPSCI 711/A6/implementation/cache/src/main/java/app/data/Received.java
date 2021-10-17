@@ -27,13 +27,11 @@ public class Received {
     public void add(String entry) {
 //        Get msgUUID from message
         String msgUUID = entry.substring(1, 14);
-        System.out.println(":" + msgUUID + ":");
 //        Update data model to show it has been received
         int msgIdx = getByUUID(msgUUID);
         String[] pair = receivedList.get(msgIdx);
-        System.out.println(pair);
         pair[1] = entry;
-        Platform.runLater(() -> messageList.add(entry));
+        Platform.runLater(() -> messageList.add(entry.substring(15)));
 
         updateReady();
     }
@@ -49,7 +47,6 @@ public class Received {
             }
             toRemove++;
         }
-        System.out.println("toRemove: " + toRemove);
 
         for (int i = 0; i < toRemove; i++) {
             Ready.get().add(receivedList.get(i)[1]);
