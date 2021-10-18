@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<b:Sources xmlns:b="http://schemas.openxmlformats.org/officeDocument/2006/bibliography" xmlns="http://schemas.openxmlformats.org/officeDocument/2006/bibliography" SelectedStyle="">
+    <b:Source>
+        <b:Year>2018</b:Year>
+        <b:Volume>30</b:Volume>
+        <b:BIBTEX_Entry>article</b:BIBTEX_Entry>
+        <b:SourceType>JournalArticle</b:SourceType>
+        <b:Title>Performance evaluation of heterogeneous cloud functions</b:Title>
+        <b:Tag>figiela-2018</b:Tag>
+        <b:DOI>10.1002/cpe.4792</b:DOI>
+        <b:Author>
+            <b:Author>
+                <b:NameList>
+                    <b:Person>
+                        <b:Last>Figiela</b:Last>
+                        <b:First>Kamil</b:First>
+                    </b:Person>
+                    <b:Person>
+                        <b:Last>Gajek</b:Last>
+                        <b:First>Adam</b:First>
+                    </b:Person>
+                    <b:Person>
+                        <b:Last>Zima</b:Last>
+                        <b:First>Adam</b:First>
+                    </b:Person>
+                    <b:Person>
+                        <b:Last>Obrok</b:Last>
+                        <b:First>Beata</b:First>
+                    </b:Person>
+                    <b:Person>
+                        <b:Last>Malawski</b:Last>
+                        <b:First>Maciej</b:First>
+                    </b:Person>
+                </b:NameList>
+            </b:Author>
+        </b:Author>
+        <b:Pages>e4792</b:Pages>
+        <b:JournalName>Concurrency and Computation: Practice and Experience</b:JournalName>
+        <b:Number>23</b:Number>
+    </b:Source>
+</b:Sources>
