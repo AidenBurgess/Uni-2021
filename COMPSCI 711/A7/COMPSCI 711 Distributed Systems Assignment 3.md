@@ -2,6 +2,14 @@
 
 ## Q1
 
+### a) Auditing System
+
+Asynchronous time system. Don't need the information distributed to be in order.
+
+### b) Broadcast Scheme
+
+Synchronous time system. It matters what order the messages are broadcast, so we need to keep track of the timestamps of the messages.
+
 
 
 ## Q2
@@ -44,3 +52,10 @@ Assume that there are two channels A and B. Channel A has a count of 3 packets i
 
 ## Q7
 
+### a) Accept request
+
+No, it cannot ignore the prepare request message. This new message should be accepted as the previous one is outdated.
+
+### b) Respond to prepare request message
+
+Without the version numbers acting as a priority system, a cycle of nodes can be formed, which leads to deadlock. Normally this would be easily resolved with the version numbers.
